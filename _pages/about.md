@@ -1,288 +1,229 @@
 ---
 permalink: /
-title: "Mohsen Amiri"
+title: "Dr. Kaveh Hooshmandi"
 author_profile: true
-redirect_from: 
+redirect_from:
   - /about/
   - /about.html
 ---
 
 <table style="width:100%; border:none; border-collapse:collapse;">
   <tr>
-    <td style="width:55%; vertical-align:top; border:none; padding-right:20px; text-align: justify;">
-      I'm a PhD candidate in Mechanical Engineering at <a href="https://www.wsu.edu">Washington State University</a> and part of the <a href="https://labs.wsu.edu/siaslab/">SIAS Lab</a>, advised by <a href="https://mme.wsu.edu/mme-personnel/wsu-profile/mehdi.hosseinzadeh/">Dr. Mehdi Hosseinzadeh</a>. 
-      <br><br>
-    My academic journey is centered on advancing real-world autonomy. I focus on developing control and opyimization-based methods that enable safety-crtitical systems to operate reliably in complex, uncertain environments, and validating these approaches through deployment on physical platforms. My work integrates tools from applied analysis and partial differential equations to address key challenges in autonomous decision-making and control. I implement and test these methods on a range of robotic systems, including mobile robots, quadrupeds, and aerial drones. More recently, I have been exploring human–robot interaction within the autonomy framework, with a particular emphasis on ensuring safety, efficiency, and robustness in both robot behavior and its interaction with humans.
-    </td>
-    <td style="width:45%; vertical-align:top; border:none; text-align:center;">
-      <img src="images/Hierarchical_Control_Structure.png" alt="Hierarchical Control Structure" style="width:100%; border-radius:10px;">
-      <p style="font-size:0.8em; color:grey; margin-top:10px;"><i>Hierarchical Control Structure</i></p>
+    <td style="width:100%; vertical-align:top; border:none; text-align: justify;">
+
+      <h1>Dr. Kaveh Hooshmandi</h1>
+
+      <p>
+        I am an Assistant Professor in Control Engineering at the Department of Electrical Engineering,
+        Arak University of Technology, Iran, and the Founder and CEO of Smart Rabo Company.
+        My work focuses on control systems, robotics, autonomous mobile robots, automation,
+        mechatronics, embedded systems, sensor fusion, state estimation, and ROS2-based robotic
+        system development.
+      </p>
+
+      <p>
+        My academic background is in nonlinear and robust control, sampled-data systems,
+        linear parameter-varying (LPV) systems, observer-based estimation, state estimation,
+        and practical control implementation. I am particularly interested in connecting rigorous
+        control theory with real engineering systems, including robotic platforms, autonomous
+        navigation systems, embedded controllers, and industrial automation applications.
+      </p>
+
+      <p>
+        Alongside my academic role, I lead industry-oriented projects at Smart Rabo Company,
+        including autonomous mobile robot development, embedded control, sensor and actuator
+        integration, electronics integration, prototype fabrication, testing, and system validation.
+        This combined academic and industrial experience enables me to work at the intersection
+        of theory, implementation, and technology translation.
+      </p>
+
     </td>
   </tr>
 </table>
 
 ---
 
-## Research:
+## Research Interests
 
 <table style="width:100%; border:none; border-collapse:collapse;">
   <tr>
     <td style="width:50%; vertical-align:top; border:none; padding-right:20px; text-align: justify;">
-      <h3><u>PriPG-RL: Privileged Planner-Guided Reinforcement Learning for Partially Observable Systems with Anytime Feasible MPC</u></h3>
-      <br>
-      M. Amiri, <b>M. Amiri</b>, A. Beikmohammadi, S. Magnu´sson, and M. Hosseinzadeh
-      <br>
-      <i>The 65th IEEE Conference on Decision and Control (CDC) (Under Review)</i>, 2026
-      <br>
-      <a href="https://doi.org/10.48550/arXiv.2604.08036">[pdf]</a> / <a href="https://github.com/mohsen1amiri/PriPG-RL_UnitreeGo2.git">[Github]</a> / <a href="https://www.youtube.com/embed/syZmWy7UJe0?si=3e1fC_3dRHls2K3N">[video]</a>
-      <br><br>  The proposed method addresses the problem of training a reinforcement learning (RL) policy under partial observability by exploiting a privileged, anytime-feasible planner agent available exclusively during training. We propose Planner-to-Policy Soft Actor-Critic (P2P-SAC), a method that distills
-the planner agent’s privileged knowledge to mitigate partial observability and thereby improve both sample efficiency and final policy performance.
-  
-</td>
-    <td style="width:50%; vertical-align:top; border:none; text-align:center;">
-      <img src="images/Copy of Copy of Your paragraph text.gif" alt="Dynamic Embedding Optimization" style="width:100%; border-radius:10px;">
-      
+
+      <h3>Control Systems and Automation</h3>
+      <p>
+        My research includes nonlinear control, robust control, LPV control, sampled-data systems,
+        observer-based control, and control of uncertain and nonlinear systems. I am interested in
+        developing control methods that are both theoretically sound and practically implementable.
+      </p>
+
+      <h3>Robotics and Autonomous Systems</h3>
+      <p>
+        I work on autonomous mobile robots, robotic navigation, motion control, trajectory tracking,
+        SLAM, localization, and ROS2-based robotic architectures. My applied work involves the
+        integration of LiDAR, IMU, encoders, motor drivers, embedded controllers, and perception
+        modules for autonomous operation.
+      </p>
+
+    </td>
+
+    <td style="width:50%; vertical-align:top; border:none; padding-left:20px; text-align: justify;">
+
+      <h3>Sensor Fusion and State Estimation</h3>
+      <p>
+        My interests include Kalman filtering, adaptive estimation, observer design, multi-sensor
+        fusion, and localization using LiDAR, IMU, encoders, and other onboard sensors. I am
+        particularly interested in robust estimation methods for uncertain and dynamic environments.
+      </p>
+
+      <h3>Embedded Systems and Mechatronics</h3>
+      <p>
+        My engineering activities include embedded implementation, microcontroller-based control,
+        actuator and sensor interfacing, hardware-software integration, mechatronic prototyping,
+        and validation of real-time robotic and automation systems.
+      </p>
+
     </td>
   </tr>
 </table>
 
 ---
 
+## Selected Publications
 
+<table style="width:100%; border:none; border-collapse:collapse;">
+  <tr>
+    <td style="width:100%; vertical-align:top; border:none; text-align: justify;">
 
+      <h3><u>Improved sampled-data synchronization in chaotic Lur’e systems via a two-layer LPV framework</u></h3>
+      <p>
+        <b>K. Hooshmandi</b>, S. Mobayen, and A. Samimi<br>
+        <i>Communications in Nonlinear Science and Numerical Simulation</i>, 2025.
+      </p>
+      <p>
+        This work develops a two-layer LPV framework for improved sampled-data synchronization
+        of chaotic Lur’e systems, contributing to robust control and nonlinear system analysis.
+      </p>
 
+      <h3><u>Synthesizing robust observer-based guaranteed cost LPV control for artificial pancreas systems under input saturation</u></h3>
+      <p>
+        <b>K. Hooshmandi</b>, S. Mobayen, and A. A. Zhilenkov<br>
+        <i>IEEE Access</i>, 2024.
+      </p>
+      <p>
+        This study presents an observer-based guaranteed cost LPV control approach for nonlinear
+        biomedical systems subject to input saturation and uncertainty.
+      </p>
+
+      <h3><u>Sampled-data LPV approach for voltage regulation of DC--DC buck converter</u></h3>
+      <p>
+        <b>K. Hooshmandi</b>, F. Bayat, and A. Bartoszewicz<br>
+        <i>Electronics</i>, 2022.
+      </p>
+      <p>
+        This paper applies sampled-data LPV control to voltage regulation in power electronic
+        converters, linking control theory with electrical engineering applications.
+      </p>
+
+      <h3><u>Polynomial LPV approach to robust H∞ control of nonlinear sampled-data systems</u></h3>
+      <p>
+        <b>K. Hooshmandi</b>, F. Bayat, M. R. Jahed-Motlagh, and A. A. Jalali<br>
+        <i>International Journal of Control</i>, 2020.
+      </p>
+      <p>
+        This research proposes a polynomial LPV framework for robust H∞ control of nonlinear
+        sampled-data systems.
+      </p>
+
+      <p>
+        A complete list of publications is available on my
+        <a href="https://scholar.google.com/citations?user=7zjCtzcAAAAJ">Google Scholar profile</a>.
+      </p>
+
+    </td>
+  </tr>
+</table>
+
+---
+
+## Applied Projects and Industrial Work
 
 <table style="width:100%; border:none; border-collapse:collapse;">
   <tr>
     <td style="width:50%; vertical-align:top; border:none; padding-right:20px; text-align: justify;">
-      <h3><u>Action Planning for Autonomous Vehicles with Hierarchical Reasoning in Adversarial Traffic Interactions </u></h3>
-      <br>
-      <b>M. Amiri</b>, K, Yazdipaz, M. Hosseinzadeh
-      <br>
-      <i>IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) (Under Review)</i>, 2026
-      <br>
-      <a href="https://www.youtube.com/embed/d40n6mHTtL8?si=h75v2tajXTtHBcn5">[video]</a>
-      <br><br>
-      The proposed method addresses the challenge of autonomous vehicle (AV) navigation in adversarial scenarios where Human-Driven Vehicles (HDVs) may exhibit non-cooperative or unaware
-behaviors, such as forced cut-ins and right-of-way violations. We
-propose a game-theoretic planner based on the Level-k reasoning
-framework to distinguish between adversarial agents (Level-0) and strategically aware agents (Level-1). By incorporating behavior-driven danger signaling and a recursive Bayesian belief update, the AV can dynamically adapt its trajectory and signaling strategy to ensure safety and efficiency in complex, non-cooperative road interactions. 
-   
-</td>
-    <td style="width:50%; vertical-align:top; border:none; text-align:center;">
-      <img src="images/IROSA2026.gif" alt="Dynamic Embedding Optimization" style="width:100%; border-radius:10px;">
-      <p style="font-size:0.8em; color:grey; margin-top:10px;"><i> Experimental data; Case a/b/c.3: Awareness Update.</i></p>
+
+      <h3>Autonomous Mobile Robots</h3>
+      <p>
+        Through Smart Rabo Company, I contribute to the design and development of autonomous
+        mobile robot platforms for industrial and real-world applications. These systems integrate
+        ROS2, LiDAR, IMU, encoders, motor drivers, navigation, localization, and control modules.
+      </p>
+
+      <h3>ROS2-Based Robotic Systems</h3>
+      <p>
+        My work includes modular robotic software architectures for perception, planning,
+        localization, monitoring, and motion control using ROS2 and Linux-based development
+        environments.
+      </p>
+
+    </td>
+
+    <td style="width:50%; vertical-align:top; border:none; padding-left:20px; text-align: justify;">
+
+      <h3>Industrial Automation and Embedded Control</h3>
+      <p>
+        I work on embedded control systems, sensor and actuator integration, electronics
+        interfacing, prototype development, and system-level validation for automation and
+        mechatronic applications.
+      </p>
+
+      <h3>Hardware-Software Integration</h3>
+      <p>
+        My practical engineering experience includes connecting control algorithms with real
+        hardware through embedded systems, motor drivers, sensors, microcontrollers, and
+        robotic software stacks.
+      </p>
+
     </td>
   </tr>
 </table>
 
 ---
 
-<table style="width:100%; border:none; border-collapse:collapse;">
-  <tr>
-    <td style="width:50%; vertical-align:top; border:none; padding-right:20px; text-align: justify;">
-      <h3><u>Safe Robot Action Planning under Human Behavioral Uncertainty with Probabilistic and Vision–Language Reasoning </u></h3>
-      <br>
-      K, Yazdipaz, <b>M. Amiri</b>, M. Hosseinzadeh
-      <br>
-      <i>IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) (Under Review)</i>, 2026
-      <br>
-      <a href="https://www.youtube.com/embed/g0OT-_c3K9Y?si=TnsMI1Sx9w_7QzYI">[video]</a>
-      <br><br>
-      The proposed action planner update the robot’s belief about human cooperation by fusing two latent attributes: Perceptual Awareness (inferred from head pose and gestures) and Navigational Responsiveness (inferred from trajectory adaptations). The framework dynamically weights these attributes based on the interaction phase to address behavioral uncertainty.
-   
-</td>
-    <td style="width:50%; vertical-align:top; border:none; text-align:center;">
-      <img src="images/Cooperative Human Aware and Responsive (4) (1).gif" alt="Dynamic Embedding Optimization" style="width:100%; border-radius:10px;">
-      <p style="font-size:0.8em; color:grey; margin-top:10px;"><i> Experimental data; CASE I: Aware/Responsive, CASE II: Unaware/unresponsive, CASE III: Aware/unresponsive,CASE IV: Initially Unaware/Responsive.</i></p>
-    </td>
-  </tr>
-</table>
+## Teaching and Supervision
 
+I teach and supervise students in areas related to control engineering, robotics, automation,
+mechatronics, modelling and simulation, embedded systems, state estimation, and engineering
+applications. My teaching approach emphasizes practical engineering, project-based learning,
+simulation, laboratory work, implementation, debugging, and experimental validation.
 
+Selected teaching and supervision areas include:
 
-
+- Control Systems and Modern Control Engineering
+- Nonlinear and Robust Control
+- Robotics and Autonomous Systems
+- Mechatronics and Embedded Systems
+- MATLAB/Simulink Modelling and Simulation
+- State Estimation and Sensor Fusion
+- Engineering Programming and Practical Implementation
+- Undergraduate and Postgraduate Project Supervision
 
 ---
 
-<table style="width:100%; border:none; border-collapse:collapse;">
-  <tr>
-    <td style="width:50%; vertical-align:top; border:none; padding-right:20px; text-align: justify;">
-      <h3><u>Advancing Control Barrier Functions for Real-Time Complex Safety Specifications</u></h3>
-      <br>
-      <b>M. Amiri</b>, I. Kolmanovsky, M. Hosseinzadeh
-      <br>
-      <i>IEEE (In progress)</i>, 2026
-      <br>
-       <a href="https://www.youtube.com/embed/xEyfdV-u8Zs?si=-0QbFJpu1ts_5ep_">[video]</a>
-      <br><br>
-      We formulate the CLF-CBF-QP as a Dynamic Embedding problem, defining a virtual continuous-time system that tracks the suboptimal yet any time feasible control input  in real-time. This rigorously guarantees the safety meaning that the constraints are satisfied at all times without any requirement of hessian. 
-  
-</td>
-    <td style="width:50%; vertical-align:top; border:none; text-align:center;">
-      <img src="images/AdvancingControlBarrierFunctionsforReal-TimeComplexSafetySpecifications-MohsenAmiri720ph264-ezgif.com-cut.gif" alt="Dynamic Embedding Optimization" style="width:100%; border-radius:10px;">
-      <p style="font-size:0.8em; color:grey; margin-top:10px;"><i>Navigation in complex environment</i></p>
-    </td>
-  </tr>
-</table>
+## Professional Profile
+
+- Assistant Professor in Control Engineering, Arak University of Technology
+- Founder and CEO, Smart Rabo Company
+- Researcher in control systems, robotics, automation, and mechatronics
+- Developer of autonomous mobile robot and embedded control platforms
+- Reviewer for international journals in control, robotics, and nonlinear systems
 
 ---
-<table style="width:100%; border:none; border-collapse:collapse;">
-  <tr>
-    <td style="width:55%; vertical-align:top; border:none; padding-right:20px; text-align: justify;">
-      <h3><u>CERTIS: A Computationally Efficient Model Predictive Control Framework for Resource-Constrained Safety-Critical Systems</u></h3>
-      <br>
-      <b>M. Amiri</b>, I. Kolmanovsky, M. Hosseinzadeh
-      <br>
-      <i>IEEE Transactions on Automatic Control (Under review)</i>, 2026
-      <br>
-       <a href="https://youtu.be/sPeUhQ82Mpc">[video]</a>
-      <br><br>
-      CERTIS enables the deployment of MPC in resource-constrained, safety-critical systems, where conventional MPC often fails due to computational limitations. A key feature of CERTIS is its ability to generate feasible and sub-optimal solutions even when the available computation time is insufficient to fully solve the MPC-related optimization problem. 
-</td>
-    <td style="width:45%; vertical-align:top; border:none; text-align:center;">
-      <div style="display: flex; flex-direction: column; gap: 10px;">
-        <img src="images/CERTIS A Computationally Efficient MPC Framework for Resource-Constrained Safety-Critical Systems - Mohsen Amiri (1080p, h264) (2).gif" alt="CERTIS Demo 2" style="width:100%; border-radius:10px;">
-      </div>
-      <p style="font-size:0.8em; color:grey; margin-top:10px;"><i>CERTIS computational efficiency</i></p>
-    </td>
-  </tr>
-</table>
----
 
-<table style="width:100%; border:none; border-collapse:collapse;">
-  <tr>
-    <td style="width:50%; vertical-align:top; border:none; padding-right:20px; text-align: justify;">
-      <h3><u>Safe and Efficient Robot Action Planning in the Presence of Unconcerned Humans</u></h3>
-      <br>
-      <b>M. Amiri</b>, M. Hosseinzadeh
-      <br>
-      <i>IEEE American Control Conference (ACC)</i>, 2025
-      <br>
-      <a href="https://arxiv.org/pdf/2501.13203">[pdf]</a> / <a href="https://www.youtube.com/embed/9mFowiFrHF4?si=23QOl0gAbc1paJcQ">[video]</a>
-      <br><br>
-      This approach proposes a robot action planning scheme that provides an efficient and probabilistically safe plan for a robot interacting with an unconcerned human—someone who is either unaware of the robot's presence or unwilling to engage in ensuring safety. 
-   
-</td>
-    <td style="width:50%; vertical-align:top; border:none; text-align:center;">
-      <img src="images/Safe and Efficient Robot Action Planning in the Presence of Unconcerned Humans - Mohsen Amiri (1080p, h264).gif " alt="Dynamic Embedding Optimization" style="width:100%; border-radius:10px;">
-      <p style="font-size:0.8em; color:grey; margin-top:10px;"><i>Real-time human awareness detection</i></p>
-    </td>
-  </tr>
-</table>
+## Contact
 
+For collaboration, research, supervision, or industrial projects, please contact me via:
 
----
-<table style="width:100%; border:none; border-collapse:collapse;">
-  <tr>
-    <td style="width:50%; vertical-align:top; border:none; padding-right:20px; text-align: justify;">
-      <h3><u>A dynamic embedding method for the real-time solution of time-varying constrained convex optimization problems</u></h3>
-      <br>
-      <b>M. Amiri</b>, I. Kolmanovsky, M. Hosseinzadeh
-      <br>
-      <i>Systems & Control Letters</i>, 2026
-      <br>
-      <a href="https://doi.org/10.1016/j.sysconle.2026.106352">[pdf]</a> / <a href="https://youtu.be/qGsw7iaElCI">[video]</a>
-      <br><br>
-      The proposed approach presents a method for solving time-varying constrained convex optimization problems in real time. The key idea is to embed the optimal solution within the internal state of a virtual dynamical system that evolves in parallel with the underlying optimization problem. 
-   
-</td>
-    <td style="width:50%; vertical-align:top; border:none; text-align:center;">
-      <img src="images/videoplayback.gif" alt="Dynamic Embedding Optimization" style="width:100%; border-radius:10px;">
-      <p style="font-size:0.8em; color:grey; margin-top:10px;"><i> Motion trajectory of the robot, illustrating that it closely follows the desired trajectory while avoiding obstacles.</i></p>
-    </td>
-  </tr>
-</table>
-
-
----
-<table style="width:100%; border:none; border-collapse:collapse;">
-  <tr>
-    <td style="width:55%; vertical-align:top; border:none; padding-right:20px; text-align: justify;">
-      <h3><u>REAP-T: A MATLAB Toolbox for Implementing Robust-to-Early Termination MPC</u></h3>
-      <br>
-      <b>M. Amiri</b>, M. Hosseinzadeh
-      <br>
-      <i>Modeling, Estimation and Control Conference (MECC)</i>, 2025
-      <br>
-      <a href="https://doi.org/10.1016/j.ifacol.2025.12.386">[pdf]</a> / <a href="https://github.com/mhsnar/REAP-T">[Github]</a>
-      <br><br>
-      Named REAP-T, this toolbox is a comprehensive, user-friendly, and modular platform that enables users to explore, analyze, and customize various components of REAP for their specific applications. Notable attributes of REAP-T are: (i) utilization of built-in MATLAB functions for defining the MPC problem; (ii) an interactive and intuitive graphical user interface for parameter tuning and visualization; (iii) real-time simulation capabilities, allowing users to observe and understand the real-time behavior of their systems; and (iv) inclusion of real-world examples designed to guide users through its effective use.
-   
-</td>
-    <td style="width:45%; vertical-align:top; border:none; text-align:center;">
-      <img src="images/REAP.gif" alt="Dynamic Embedding Optimization" style="width:100%; border-radius:10px;">
-      <p style="font-size:0.8em; color:grey; margin-top:10px;"><i>Overview of the Toolbox</i></p>
-    </td>
-  </tr>
-</table>
-
----
-<table style="width:100%; border:none; border-collapse:collapse;">
-  <tr>
-    <td style="width:55%; vertical-align:top; border:none; padding-right:20px; text-align: justify;">
-      <h3><u>Practical considerations for implementing robust-to-early termina-
-tion model predictive control</u></h3>
-      <br>
-      <b>M. Amiri</b>, M. Hosseinzadeh
-      <br>
-      <i>Systems & Control Letters</i>, 2025
-      <br>
-      <a href="https://doi.org/10.1016/j.sysconle.2024.106018">[pdf]</a> 
-      <br><br>
-      The core idea is to adaptively adjust the evolution rate of the gradient flow dynamics such that REAP’s properties are maintained when REAP computes the updates of the decision variables in discrete time. Theoretical properties of such a discrete-time implementation are proven analytically, and extensive simulation and experimental studies are provided to support our analyses.
-   
-</td>
-    <td style="width:45%; vertical-align:top; border:none; text-align:center;">
-      <img src="images/CERTISAComputationallyEfficientMPCFrameworkforResource-ConstrainedSafety-CriticalSystems-MohsenAmiri1080ph26411-ezgif.com-cut (1).gif" alt="Dynamic Embedding Optimization" style="width:100%; border-radius:10px;">
-      <p style="font-size:0.8em; color:grey; margin-top:10px;"><i>Drone Hovering</i></p>
-    </td>
-  </tr>
-</table>
-
----
-<table style="width:100%; border:none; border-collapse:collapse;">
-  <tr>
-    <td style="width:50%; vertical-align:top; border:none; padding-right:20px; text-align: justify;">
-      <h3><u>Closed-Loop Model Identification and MPC-based Navigation of Quadcopters: A Case Study of Parrot Bebop 2</u></h3>
-      <br>
-      <b>M. Amiri</b>, M. Hosseinzadeh
-      <br>
-      <i>Modeling, Estimation and Control Conference (MECC)</i>, 2024
-      <br>
-      <a href="https://doi.org/10.1016/j.ifacol.2025.01.016">[pdf]</a> / <a href="https://github.com/mhsnar/Closed-loop-Identification">[Github]</a>
-      <br><br>
-      This approach introduces a linear, efficient quadrotor model that reduces complexity while maintaining performance. We developed a steady-state-aware Model Predictive Control (MPC) that ensures constraint satisfaction with low computational overhead, ideal for resource-constrained platforms. The proposed algorithms were experimentally validated and evaluated using the Parrot Bebop 2.
-   
-</td>
-    <td style="width:50%; vertical-align:top; border:none; text-align:center;">
-      <img src="images/Closed-Loop Model Identification and MPC-based Navigation of Quadcopters A Case Study of Parrot B.2 - Mohsen Amiri (1080p, h264).gif" alt="Dynamic Embedding Optimization" style="width:100%; border-radius:10px;">
-      <p style="font-size:0.8em; color:grey; margin-top:10px;"><i>Project Demonstration</i></p>
-    </td>
-  </tr>
-</table>
-
----
-<table style="width:100%; border:none; border-collapse:collapse;">
-  <tr>
-    <td style="width:50%; vertical-align:top; border:none; padding-right:20px; text-align: justify;">
-      <h3><u>Steady-State-Aware Model Predictive Control for Tracking in Systems With Limited Computing Capacity</u></h3>
-      <br>
-      <b>M. Amiri</b>, M. Hosseinzadeh
-      <br>
-      <i>IEEE Control Systems Letters</i>, 2024
-      <br>
-      <a href="https://doi.org/10.1109/LCSYS.2024.3370266">[pdf]</a> / <a href="https://www.youtube.com/embed/DROqNThat3k?si=Es-D4ZVeUmExL3fS">[Video]</a>
-      <br><br>
-      We developed a steady-state-aware MPC that guarantees tracking of piecewise constant references and satisfaction of constraints, without requiring the desired admissible steady-state configuration and without adding extra computational load. Stability, recursive feasibility, and local infinite-horizon optimality of the proposed MPC are proven analytically. 
-   
-</td>
-     <td style="width:50%; vertical-align:top; border:none; text-align:center;">
-      <img src="images/Screenshot 2026-01-12 135217.jpg" alt="Dynamic Embedding Optimization" style="width:100%; border-radius:10px;">
-      <p style="font-size:0.8em; color:grey; margin-top:10px;"><i>Achieved steady-state configuration with the proposed steadystate-aware MPC and MPC scheme described in the literature; in the right figure, solid line represents u1(t) and dashed line represents u2(t)</i></p>
-    </td>
-  </tr>
-</table>
-
-
-
+- Email: <a href="mailto:dk.hooshmandi@gmail.com">dk.hooshmandi@gmail.com</a>
+- Academic Email: <a href="mailto:k.hooshmandi@arakut.ac.ir">k.hooshmandi@arakut.ac.ir</a>
+- GitHub: <a href="https://github.com/kaveh-hooshmandi">github.com/kaveh-hooshmandi</a>
+- Google Scholar: <a href="https://scholar.google.com/citations?user=7zjCtzcAAAAJ">Google Scholar Profile</a>
