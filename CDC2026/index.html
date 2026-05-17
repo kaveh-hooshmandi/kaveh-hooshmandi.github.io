@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IROS 2026</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 20px;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto; /* Center the content */
+        }
+
+        .video-container {
+            display: flex;
+            justify-content: flex-end; /* Shift video to the right */
+            margin-top: 20px;
+        }
+
+        iframe {
+            width: 640px;
+            height: 360px; /* Updated to 16:9 aspect ratio */
+        }
+
+        /* --- New styles for the GitHub link --- */
+        .repo-link {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #f6f8fa;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+        }
+
+        .repo-link a {
+            color: #0969da;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .repo-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p>
+            Below is a video showcasing our results on Unitree Go2 quadruped, 
+            which supplements our manuscript submission to the 65th IEEE Conference on Decision and Control (CDC 2026).
+        </p>
+        
+        <div class="video-container">
+            <iframe 
+                src="https://www.youtube.com/embed/syZmWy7UJe0?si=3e1fC_3dRHls2K3N"
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <p>
+            For a higher resolution view, click the icon in the bottom right to expand the video.  The source code and materials for this manuscript are available on GitHub:<br>
+            <a href="https://github.com/mohsen1amiri/PriPG-RL_UnitreeGo2" target="_blank">  mohsen1amiri/PriPG-RL_UnitreeGo2  </a>
+        </p>
+
+    
+    </div>
+</body>
+</html>

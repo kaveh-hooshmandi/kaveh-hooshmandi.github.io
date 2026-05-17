@@ -1,0 +1,11 @@
+---
+title: "Steady-State-Aware Model Predictive Control for Tracking in Systems With Limited Computing Capacity"
+collection: publications
+permalink: /publication/SSMPC2024
+date: 2024-01-21
+venue: 'IEEE Control Systems Letters'
+paperurl: 'https://doi.org/10.1109/LCSYS.2024.3370266'
+citation: 'Amiri, M., & Hosseinzadeh, M. (2024). Steady-State-Aware Model Predictive Control for Tracking in Systems With Limited Computing Capacity. IEEE Control Systems Letters.'
+---
+Model Predictive Control (MPC) determines the control input by solving a receding horizon optimal control problem at each time instant, which may be computationally challenging for systems with limited computing capacity. One possible approach to address this issue in tracking problems is to reduce the prediction horizon length and modify the conventional MPC formulation so as to enlarge the region of attraction. Prior work assumes that the desired admissible steady-state configuration is known for each sequence of the reference, which is unrealistic when sequences of the reference are unknown a priori. This letter develops a steady-state-aware MPC that guarantees tracking of piecewise constant references and satisfaction of constraints, without requiring the desired admissible steady-state configuration and without adding extra computational load. Stability, recursive feasibility, and local infinite-horizon optimality of the proposed MPC are proven analytically. The effectiveness of the proposed MPC is investigated in comparison with prior work.
+
