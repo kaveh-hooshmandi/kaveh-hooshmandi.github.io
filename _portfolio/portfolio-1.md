@@ -1,6 +1,6 @@
 ---
-title: "Safe and Intelligent Autonomous Systems Laboratory"
-excerpt: "Team<br/><img src='/images/1-1.jpeg' style='width:80%;'>"
+title: "AUT Intelligent Autonomous Systems Laboratory"
+excerpt: "Team<br/><img src='/images/1-1.jpg' style='width:80%;'>"
 collection: portfolio
 ---
 
