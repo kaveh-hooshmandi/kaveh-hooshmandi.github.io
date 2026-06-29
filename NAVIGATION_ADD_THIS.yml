@@ -1,0 +1,10 @@
+# Add this item to _data/navigation.yml under the main navigation list.
+# Example:
+# main:
+#   - title: "Projects"
+#     url: /projects/
+#   - title: "Courses"
+#     url: /courses/control-systems/
+
+- title: "Courses"
+  url: /courses/control-systems/

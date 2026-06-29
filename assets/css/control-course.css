@@ -1,0 +1,42 @@
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0 1.5rem 0;
+}
+.course-card {
+  border: 1px solid #d6d6d6;
+  border-radius: 10px;
+  padding: 1rem;
+  background: #fafafa;
+}
+.assistant-box {
+  border: 1px solid #cfcfcf;
+  border-radius: 12px;
+  padding: 1rem;
+  background: #f8f8f8;
+  margin: 1rem 0;
+}
+.assistant-box textarea {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0.5rem 0;
+  padding: 0.75rem;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  font-family: inherit;
+}
+.assistant-box button {
+  padding: 0.55rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #222;
+  color: white;
+  cursor: pointer;
+}
+.assistant-answer {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-left: 4px solid #444;
+  background: white;
+}
