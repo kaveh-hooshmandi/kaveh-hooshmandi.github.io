@@ -28,6 +28,9 @@ main:
     
   - title: "CV"
     url: /cv/
+
+  - title: "Courses"
+    url: /courses/control-systems/
     
   # - title: "Guide"
   #   url: /markdown/
