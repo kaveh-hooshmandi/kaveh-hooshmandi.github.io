@@ -14,7 +14,7 @@ The sequence below is a draft. Session dates, readings, and links to slides will
 
 | Unit | Topic | Suggested practice |
 |---:|---|---|
-| 1 | ROS 2 environment and command-line tools | Run and inspect example nodes |
+| 1 | ROS 2 environment and command-line tools | Read [Ubuntu Terminal Basics (PDF)](/courses/robot-programming-ros2/materials/ubuntu_linux_terminal_basics.pdf), then run and inspect example nodes |
 | 2 | Workspaces, packages, and Python nodes | Create a package and run a node |
 | 3 | Topics and message types | Build a publisher and subscriber |
 | 4 | Services and actions | Implement request/response and long-running tasks |

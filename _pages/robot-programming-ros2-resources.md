@@ -10,6 +10,10 @@ author_profile: true
 
 # Resources
 
+## Preparatory material
+
+- [Ubuntu Terminal Basics (PDF)](/courses/robot-programming-ros2/materials/ubuntu_linux_terminal_basics.pdf) — an introduction to Ubuntu command-line essentials for the practical sessions.
+
 ## Official references
 
 - [ROS 2 documentation](https://docs.ros.org/) — installation guides, concepts, and tutorials.

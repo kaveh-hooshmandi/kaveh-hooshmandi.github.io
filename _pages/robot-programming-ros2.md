@@ -26,6 +26,10 @@ This course introduces the tools and programming patterns used to build robot ap
   <div class="ros-course-card"><strong>ROS 2 distribution</strong>{{ site.data.ros2_course.ros_distribution }}</div>
 </div>
 
+## Getting started
+
+New to the Ubuntu command line? Start with [Ubuntu Terminal Basics (PDF)](/courses/robot-programming-ros2/materials/ubuntu_linux_terminal_basics.pdf) before the first practical session.
+
 ## What you will learn
 
 The planned learning outcomes are to:
