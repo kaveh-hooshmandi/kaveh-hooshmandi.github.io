@@ -7,6 +7,8 @@ author_profile: true
 
 <link rel="stylesheet" href="/assets/css/control-course.css">
 
+[← All courses](/courses/)
+
 # Applied Control Systems
 ### From Feedback Theory to Robotics, Embedded Control, and Industrial Automation
 

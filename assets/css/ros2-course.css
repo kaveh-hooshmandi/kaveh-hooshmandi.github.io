@@ -1,0 +1,56 @@
+.ros-course-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.25rem 0 2rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #d9e3e6;
+}
+
+.ros-course-nav a {
+  display: inline-block;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid #d9e3e6;
+  border-radius: 0.4rem;
+  text-decoration: none;
+}
+
+.ros-course-nav a[aria-current="page"] {
+  color: #fff;
+  background: #176577;
+  border-color: #176577;
+}
+
+.ros-course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.ros-course-card {
+  padding: 1rem;
+  border: 1px solid #d9e3e6;
+  border-radius: 0.6rem;
+  background: #f7fafb;
+}
+
+.ros-course-card strong {
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.ros-course-card p {
+  margin: 0.35rem 0 0;
+}
+
+.ros-course-note {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid #176577;
+  background: #f1f7f8;
+}
+
+.ros-course-note p:last-child {
+  margin-bottom: 0;
+}
