@@ -13,6 +13,7 @@ author_profile: true
 ## Preparatory material
 
 - [Ubuntu Terminal Basics (PDF)](/courses/robot-programming-ros2/materials/ubuntu_linux_terminal_basics.pdf) — an introduction to Ubuntu command-line essentials for the practical sessions.
+- [Ubuntu Terminal Basics slide source (LaTeX)](/courses/robot-programming-ros2/materials/ubuntu_terminal_basics.tex) — editable source used to generate the PDF.
 
 ## Official references
 
