@@ -2,8 +2,8 @@
 \usetheme{default}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
+\usepackage{textcomp}
 \usepackage{listings}
-\usepackage{upquote}
 \usepackage{tabularx}
 \usepackage{colortbl}
 \usepackage{xcolor}
@@ -38,7 +38,7 @@
   keywordstyle=\color{white},
   commentstyle=\color{teal!50},
   frame=single, rulecolor=\color{ink},
-  showstringspaces=false, breaklines=true,
+  showstringspaces=false, breaklines=true, upquote=true,
   columns=fullflexible, keepspaces=true,
   xleftmargin=0.6em, xrightmargin=0.6em,
   aboveskip=0.6em, belowskip=0.6em
@@ -65,7 +65,7 @@
   \vspace{0.35cm}
   {\color{white!78}\Large A practical first tour of the Linux terminal\par}
   \vspace{0.6cm}
-  {\color{white!65}\normalsize Chapter 1 \quad|\quad Ubuntu command line essentials\par}
+  {\color{white!65}\normalsize Ubuntu command line essentials\par}
   \vspace{0.65cm}
   {\color{white}\large\bfseries Dr. Kaveh Hooshmandi\par}
   \vspace{0.12cm}
@@ -77,11 +77,11 @@
   \begin{columns}[T,onlytextwidth]
     \column{.56\textwidth}
       \begin{itemize}
-        \item Why the terminal is useful for repeatable work
-        \item Navigate folders and create, inspect, and remove files
-        \item Redirect command output and use Tab completion
-        \item Recognize when elevated permissions can cause damage
-        \item Open the current folder in Ubuntu's file manager
+        \item Understand the terminal, Shell, Bash, and user identity
+        \item Read paths; use \term{pwd}, \term{cd /}, and \term{cd \textasciitilde{}}
+        \item Create and read files, redirect output, and run programs
+        \item Use completion, permissions, and administrator access carefully
+        \item Build a practical workflow with packages, processes, and tools
       \end{itemize}
     \column{.40\textwidth}
       \begin{block}{One simple idea}
@@ -90,54 +90,9 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{First terminal examples (1/2): write and read}
-  \begin{lstlisting}
-mkdir -p ~/terminal_practice
-cd ~/terminal_practice
-echo "Hello" > test.txt
-cat test.txt
-echo "first line" > test.txt
-echo "second line" >> test.txt
-cat test.txt
-  \end{lstlisting}
-  \begin{columns}[T,onlytextwidth]
-    \column{.48\textwidth}
-      \begin{block}{What the symbols mean}
-        \term{>} (create or replace a file)\\[3pt]
-        \term{\textgreater\kern0pt\textgreater} (append to the end of a file)
-      \end{block}
-    \column{.48\textwidth}
-      \begin{exampleblock}{Check the result}
-        The first \term{cat test.txt} prints \term{Hello}. The last one prints \term{first line} and \term{second line} on separate lines.
-      \end{exampleblock}
-  \end{columns}
-\end{frame}
-
-\begin{frame}[fragile]{First terminal examples (2/2): files and Python}
-  \begin{lstlisting}
-ls > files.txt
-cat files.txt
-xdg-open .
-printf 'print("Hello from Python")\n' > test.py
-python3 test.py
-cd ~/
-  \end{lstlisting}
-  \begin{columns}[T,onlytextwidth]
-    \column{.48\textwidth}
-      \begin{block}{Paths and programs}
-        \term{.} (current folder)\\[3pt]
-        \term{\textasciitilde{}/} (your home folder)\\[3pt]
-        \term{python3 test.py} (run the script)
-      \end{block}
-    \column{.48\textwidth}
-      \begin{warningbox}{Root shell}
-        A root shell (administrator session) is not needed for these exercises. Work in your own practice folder.
-      \end{warningbox}
-  \end{columns}
-\end{frame}
-
 \section{Why the terminal?}
-\begin{frame}{1.1 \; Who cares about the terminal?}
+
+\begin{frame}{Who cares about the terminal?}
   \begin{columns}[T,onlytextwidth]
     \column{.58\textwidth}
       \begin{itemize}
@@ -155,67 +110,94 @@ cd ~/
 \end{frame}
 
 \section{The terminal}
-\begin{frame}{1.2 \; The terminal: a command workspace}
+
+\begin{frame}{The terminal: a command workspace}
   \begin{columns}[T,onlytextwidth]
-    \column{.43\textwidth}
+    \column{.40\textwidth}
       \begin{hintblock}
         Open a terminal with \key{Ctrl+Alt+T}. The shell reads a command, runs it, then shows the result and a new prompt.
       \end{hintblock}
       \begin{exampleblock}{Command shape}
-        \centering\term{command} \; \term{option} \; \term{target}\\[3pt]
-        \raggedright Example: \term{ls -l \textasciitilde{}/Documents}
+        \term{ls -l \textasciitilde{}/Documents}\\[5pt]
+        \term{ls} (command: list contents)\\[3pt]
+        \term{-l} (option: show details)\\[3pt]
+        \term{\textasciitilde{}/Documents} (target folder)
       \end{exampleblock}
-    \column{.54\textwidth}
-      \begin{block}{Useful command families}
+    \column{.57\textwidth}
+      \begin{block}{Each command and its meaning}
         \small
-        \begin{tabular}{@{}p{.14\linewidth}p{.78\linewidth}@{}}
-          \term{pwd}, \term{ls} & Find where you are and see files\\
-          \term{cd}, \term{mkdir} & Move between folders; create folders\\
-          \term{touch}, \term{cat} & Create an empty file; read its contents\\
-          \term{grep} & Show lines containing a word\\
-          \term{nano} & Edit a text file in the terminal\\
-          \term{apt}, \term{sudo} & Install software; request admin rights\\
-          \term{alias} & Give a frequently used command a short name
-        \end{tabular}
+        \renewcommand{\arraystretch}{1.15}
+        \begin{tabularx}{\linewidth}{@{}>{\ttfamily}l@{\hspace{.9em}}>{\raggedright\arraybackslash}X@{}}
+          \rowcolor{blue!13}\normalfont\bfseries Command & \bfseries Explanation\\
+          pwd   & Print the current directory's path.\\
+          \rowcolor{blue!5}ls    & List files and folders.\\
+          cd    & Change the current directory.\\
+          \rowcolor{blue!5}mkdir & Create a directory.\\
+          touch & Create a file or update its timestamps.\\
+          \rowcolor{blue!5}cat   & Print a file's contents.\\
+          rm    & Delete files (\term{-r} for directories).\\
+          \rowcolor{blue!5}grep  & Select lines matching a pattern.\\
+          nano  & Edit a text file in the terminal.\\
+          \rowcolor{blue!5}apt   & Manage Ubuntu software packages.\\
+          sudo  & Run a command as root by default.\\
+          \rowcolor{blue!5}alias & Define a shortcut name for a command.
+        \end{tabularx}
       \end{block}
   \end{columns}
 \end{frame}
 
-\begin{frame}{1.2 \; Useful command line programs (1/2)}
-  \normalsize
-  \renewcommand{\arraystretch}{1.15}
-  \begin{block}{Table 1 -- the book's command toolkit, with teaching examples}
-    \begin{tabularx}{\linewidth}{@{}>{\bfseries\ttfamily}p{1.65cm}>{\ttfamily}p{4cm}X@{}}
-      \rowcolor{blue!13}\normalfont\bfseries Command & \normalfont\bfseries Example & \normalfont\bfseries What to expect\\
-      pwd & pwd & Prints the full path of your current folder.\\[3pt]
-      mkdir & mkdir a\_folder & Creates a new folder here.\\[3pt]
-      cd & cd a\_folder & Moves the shell into that folder.\\[3pt]
-      touch & touch a\_file.txt & Creates an empty file, or updates its timestamp.\\[3pt]
-      cat & cat a\_file.txt & Prints the contents of a text file.\\[3pt]
-      rm & rm a\_file.txt & Deletes a file; \texttt{-r} also removes a directory tree.\\
-    \end{tabularx}
+\begin{frame}[fragile]{Shell, Bash, and the root user}
+  \begin{columns}[T,onlytextwidth]
+    \column{.48\textwidth}
+      \begin{block}{Shell: the general idea}
+        A shell reads text commands, interprets them, and runs them. For example, \term{ls} (lists the current folder's contents).
+      \end{block}
+      \begin{exampleblock}{Bash: one kind of shell}
+        \term{bash} is a specific shell. Other shells include \term{sh}, \term{zsh}, and \term{fish}.
+      \end{exampleblock}
+    \column{.48\textwidth}
+      \begin{block}{root: the administrator account}
+        The \term{root} user has extensive system access. A \emph{root shell} is a shell running as this user.
+      \end{block}
+      \begin{warningbox}{Return to your regular user}
+        \term{sudo -i} (starts a root shell); \term{exit} (leaves it). Check each command carefully while in a root shell.
+      \end{warningbox}
+  \end{columns}
+  \begin{block}{A typical terminal prompt}
+    \term{kaveh@ubuntu:\textasciitilde\$} (regular user) \quad
+    \term{root@ubuntu:\textasciitilde\#} (root user).\par
+    The prompt can be customized; \term{whoami} (prints the current user) is the reliable check.
   \end{block}
-  \begin{warningbox}{Know your location before \term{rm}}
-    Run \term{pwd} and \term{ls} first. A deleted file normally does not go to the Trash.
-  \end{warningbox}
 \end{frame}
 
-\begin{frame}{1.2 \; Useful command line programs (2/2)}
-  \normalsize
-  \renewcommand{\arraystretch}{1.15}
-  \begin{block}{Table 1 -- continued}
-    \begin{tabularx}{\linewidth}{@{}>{\bfseries\ttfamily}p{1.65cm}>{\ttfamily}p{4cm}X@{}}
-      \rowcolor{blue!13}\normalfont\bfseries Command & \normalfont\bfseries Example & \normalfont\bfseries What to expect\\
-      ls & ls & Lists files and folders.\\[3pt]
-      grep & cat a\_file.txt \textbar{} grep robot & Keeps lines that contain \term{robot}.\\[3pt]
-      nano & nano a\_file.txt & Opens a simple terminal text editor.\\[3pt]
-      sudo & sudo apt update & Runs a command with administrator rights.\\[3pt]
-      apt & sudo apt install git & Installs an Ubuntu package (after repository setup).\\[3pt]
-      alias & alias hi="echo hello" & Creates a short name for a command in this shell.\\
-    \end{tabularx}
-  \end{block}
+\begin{frame}[fragile]{Read the prompt: the shell is ready for your command}
+  A prompt is the text the shell displays when it is ready for your next command:
+  \begin{lstlisting}
+kaveh@ubuntu:~$
+  \end{lstlisting}
+  \begin{columns}[T,onlytextwidth]
+    \column{.53\textwidth}
+      \begin{block}{Each part and its meaning}
+        \small
+        \renewcommand{\arraystretch}{1.15}
+        \begin{tabularx}{\linewidth}{@{}>{\ttfamily}l@{\hspace{.8em}}>{\raggedright\arraybackslash}X@{}}
+          kaveh & (the current username).\\
+          ubuntu & (the computer's name, or hostname).\\
+          \textasciitilde{} & (the current folder is this user's Home).\\
+          \$ & (the usual prompt symbol for a regular user).
+        \end{tabularx}
+      \end{block}
+    \column{.43\textwidth}
+      \begin{block}{Now type a command}
+        \begin{lstlisting}
+kaveh@ubuntu:~$ ls
+        \end{lstlisting}
+        Type only \term{ls} (list files), then press \key{Enter}.
+      \end{block}
+  \end{columns}
   \begin{hintblock}
-    This table contains all 12 programs in the source chapter. The following slides show how to use them in practice.
+    A root shell commonly ends its prompt with \term{\#}. Prompts can be customized;
+    \term{whoami} (prints the current username) lets you check your identity.
   \end{hintblock}
 \end{frame}
 
@@ -243,33 +225,110 @@ cd ~/
   \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Search text and reuse a command}
-  \begin{block}{Find matching names with \term{grep}}
-    \begin{lstlisting}
-ls | grep notes
-    \end{lstlisting}
-    \term{ls} lists filenames; the pipe passes them to \term{grep}, which keeps names containing \term{notes}.
+\begin{frame}{Useful command line programs (1/2)}
+  \normalsize
+  \renewcommand{\arraystretch}{1.15}
+  \begin{block}{Commands and practical examples}
+    \begin{tabularx}{\linewidth}{@{}>{\bfseries\ttfamily}p{1.65cm}>{\ttfamily}p{4cm}X@{}}
+      \rowcolor{blue!13}\normalfont\bfseries Command & \normalfont\bfseries Example & \normalfont\bfseries What to expect\\
+      pwd & pwd & Prints the full path of your current folder.\\[3pt]
+      mkdir & mkdir a\_folder & Creates a new folder here.\\[3pt]
+      cd & cd a\_folder & Moves the shell into that folder.\\[3pt]
+      touch & touch test.txt & Creates an empty file, or updates its timestamp.\\[3pt]
+      cat & cat test.txt & Prints the contents of a text file.\\[3pt]
+      rm & rm test.txt & Deletes a file; \texttt{-r} also removes a directory tree.\\
+    \end{tabularx}
   \end{block}
-  \begin{exampleblock}{Create a short alias}
-    \begin{lstlisting}
-alias hi='echo hello'
-hi
-    \end{lstlisting}
-    \term{alias} gives a command a short name in the current shell session.
-  \end{exampleblock}
+  \begin{warningbox}{Know your location before \term{rm}}
+    Run \term{pwd} and \term{ls} first. A deleted file normally does not go to the Trash.
+  \end{warningbox}
+\end{frame}
+
+\begin{frame}{Useful command line programs (2/2)}
+  \normalsize
+  \renewcommand{\arraystretch}{1.15}
+  \begin{block}{Commands and practical examples (continued)}
+    \begin{tabularx}{\linewidth}{@{}>{\bfseries\ttfamily}p{1.65cm}>{\ttfamily}p{4cm}X@{}}
+      \rowcolor{blue!13}\normalfont\bfseries Command & \normalfont\bfseries Example & \normalfont\bfseries What to expect\\
+      ls & ls & Lists files and folders.\\[3pt]
+      grep & cat test.txt \textbar{} grep robot & Keeps lines that contain \term{robot}.\\[3pt]
+      nano & nano test.txt & Opens a simple terminal text editor.\\[3pt]
+      sudo & sudo apt update & Runs a command with administrator rights.\\[3pt]
+      apt & sudo apt install git & Installs an Ubuntu package (after repository setup).\\[3pt]
+      alias & alias hi="echo hello" & Creates a short name for a command in this shell.\\
+    \end{tabularx}
+  \end{block}
+\end{frame}
+
+\section{Paths and navigation}
+
+\begin{frame}{Paths first: filesystem root, Home, and here}
+  \begin{columns}[T,onlytextwidth]
+    \column{.49\textwidth}
+      \begin{block}{Read these path symbols}
+        \begin{itemize}
+          \item \term{/} (the top of the filesystem tree).
+          \item \term{\textasciitilde{}} or \term{\textasciitilde{}/} (the current user's Home folder).
+          \item \term{.} (the current working folder).
+          \item \term{..} (the parent folder).
+        \end{itemize}
+      \end{block}
+    \column{.47\textwidth}
+      \centering
+      \begin{tikzpicture}[every node/.style={font=\small},
+        folder/.style={draw=blue,fill=paper,rounded corners,minimum width=1.8cm,minimum height=.65cm},
+        edge/.style={->,thick,teal}]
+        \node[folder] (top) at (0,0) {\term{/}};
+        \node[folder] (users) at (-1.35,-1.15) {\term{/home}};
+        \node[folder] (admin) at (1.35,-1.15) {\term{/root}};
+        \node[folder] (student) at (-1.35,-2.3) {\term{/home/student}};
+        \draw[edge] (top)--(users);
+        \draw[edge] (top)--(admin);
+        \draw[edge] (users)--(student);
+      \end{tikzpicture}
+  \end{columns}
   \begin{hintblock}
-    A pipe \term{|} connects one command's output to the next command's input.
+    \term{/} names the filesystem root; \term{root} names the administrator account; \term{/root} is its usual Home folder. For user \term{student}, Home is usually \term{/home/student}.
+  \end{hintblock}
+\end{frame}
+
+\begin{frame}[fragile]{Find your location, go to /, then return Home}
+  \begin{columns}[T,onlytextwidth]
+    \column{.35\textwidth}
+      \begin{lstlisting}
+pwd
+cd /
+pwd
+cd ~
+pwd
+      \end{lstlisting}
+    \column{.61\textwidth}
+      \begin{block}{Run one command per line}
+        \begin{enumerate}
+          \item \term{pwd} (prints your current working directory).
+          \item \term{cd /} (moves to the filesystem root).
+          \item \term{pwd} (now prints \term{/}).
+          \item \term{cd \textasciitilde{}} (returns to your Home folder).
+          \item \term{pwd} (for user \term{student}, typically prints \term{/home/student}).
+        \end{enumerate}
+      \end{block}
+  \end{columns}
+  \begin{hintblock}
+    \term{cd} means change directory; \term{pwd} means print working directory.
+    Both \term{cd} with no argument and \term{cd \textasciitilde{}/} also take you Home.
+    Changing folders keeps the same user identity.
   \end{hintblock}
 \end{frame}
 
 \section{Let's use it}
-\begin{frame}[fragile]{1.3 \; Let's use it (!?) -- make a practice folder}
+
+\begin{frame}[fragile]{Make a practice folder}
   \begin{lstlisting}
 # Move to your home folder, then create a workspace for this exercise
 cd ~
 mkdir terminal_practice
 cd terminal_practice
-touch empty.txt
+touch test.txt
 pwd
 ls
   \end{lstlisting}
@@ -280,7 +339,7 @@ ls
       \end{hintblock}
     \column{.47\textwidth}
       \begin{exampleblock}{What should you see?}
-        \term{pwd} ends in \term{/terminal\_practice}; \term{ls} lists \term{empty.txt}. The prompt returns after each command.
+        \term{pwd} ends in \term{/terminal\_practice}; \term{ls} lists \term{test.txt}. The prompt returns after each command.
       \end{exampleblock}
   \end{columns}
 \end{frame}
@@ -292,7 +351,7 @@ ls
     link/.style={->,thick,teal}]
     \node[folder] (home) {Home\\\term{\textasciitilde}};
     \node[folder,right=1.2cm of home] (practice) {Practice folder\\\term{terminal\_practice}};
-    \node[folder,right=1.2cm of practice] (file) {Text file\\\term{empty.txt}};
+    \node[folder,right=1.2cm of practice] (file) {Text file\\\term{test.txt}};
     \draw[link] (home)--node[above]{\term{cd}} (practice);
     \draw[link] (practice)--node[above]{\term{touch}} (file);
   \end{tikzpicture}
@@ -305,11 +364,55 @@ ls
   \end{alertblock}
 \end{frame}
 
+\begin{frame}[fragile]{First file: echo, cat, and output redirection}
+  \begin{lstlisting}
+echo "first line" > test.txt
+echo "second line" >> test.txt
+cat test.txt
+ls > test.txt
+  \end{lstlisting}
+  \begin{block}{In your practice folder: read the commands in order}
+    \begin{enumerate}
+      \item \term{echo "first line" > test.txt} (creates \term{test.txt}, or replaces its old contents).
+      \item \term{echo "second line" >\kern0pt> test.txt} (adds a second line without removing the first).
+      \item \term{cat test.txt} (prints \term{first line} followed by \term{second line}).
+      \item \term{ls > test.txt} (replaces the two lines with the current folder's listing).
+    \end{enumerate}
+  \end{block}
+  \begin{warningbox}{The two redirection signs do different things}
+    \term{>} (overwrite) and \term{>}\term{>} (append). Check the target filename before pressing Enter.
+  \end{warningbox}
+\end{frame}
+
+\begin{frame}[fragile]{Open a folder and run a Python file}
+  \begin{columns}[T,onlytextwidth]
+    \column{.48\textwidth}
+      \begin{block}{Open folders on the desktop}
+        \begin{lstlisting}
+xdg-open .
+xdg-open ~/
+        \end{lstlisting}
+        \term{xdg-open .} (opens the current folder); \term{xdg-open \textasciitilde{}/} (opens Home). These examples need a graphical desktop.
+      \end{block}
+    \column{.48\textwidth}
+      \begin{block}{Create and run a Python file}
+        \begin{lstlisting}
+echo 'print("Hello")' > test.py
+python3 test.py
+        \end{lstlisting}
+        \term{echo} (prints the code); \term{>} (saves it to \term{test.py}); \term{python3 test.py} (runs the file and prints \term{Hello}).
+      \end{block}
+  \end{columns}
+  \begin{hintblock}
+    Continue in \term{\textasciitilde{}/terminal\_practice}. Run \term{pwd} (check your location) and \term{ls} (check the files) before running the script. Python 3 must be installed.
+  \end{hintblock}
+\end{frame}
+
 \begin{frame}[fragile]{Create, edit, and read a text file}
   \begin{columns}[T,onlytextwidth]
     \column{.48\textwidth}
       \begin{lstlisting}
-nano notes.txt
+nano test.txt
       \end{lstlisting}
       Type a short line, then save and exit Nano:
       \begin{enumerate}
@@ -319,11 +422,11 @@ nano notes.txt
       \end{enumerate}
     \column{.48\textwidth}
       \begin{lstlisting}
-cat notes.txt
+cat test.txt
 ls
       \end{lstlisting}
       \begin{exampleblock}{What to expect}
-        \term{cat notes.txt} prints the line you saved. \term{ls} lists \term{notes.txt} in the current folder.
+        \term{cat test.txt} prints the line you saved. \term{ls} lists \term{test.txt} in the current folder.
       \end{exampleblock}
   \end{columns}
 \end{frame}
@@ -365,38 +468,28 @@ cd ~
   \end{itemize}
 \end{frame}
 
-\section{Bash redirections}
-\begin{frame}[fragile]{1.4 \; Bash redirections: save command output}
+\section{Search and aliases}
+\begin{frame}[fragile]{Search text and reuse a command}
+  \begin{block}{Find matching names with \term{grep}}
+    \begin{lstlisting}
+ls | grep test
+    \end{lstlisting}
+    \term{ls} lists filenames; the pipe passes them to \term{grep}, which keeps names containing \term{test}.
+  \end{block}
+  \begin{exampleblock}{Create a short alias}
+    \begin{lstlisting}
+alias hi='echo hello'
+hi
+    \end{lstlisting}
+    \term{alias} gives a command a short name in the current shell session.
+  \end{exampleblock}
   \begin{hintblock}
-    Before writing a script for a small, common task, check whether Bash already has a simple command for it.
+    A pipe \term{|} connects one command's output to the next command's input.
   \end{hintblock}
-  \begin{center}
-    \begin{tikzpicture}[every node/.style={font=\small},
-      box/.style={draw=blue,fill=paper,rounded corners=3pt,minimum width=2.5cm,minimum height=.72cm,align=center},
-      arrow/.style={->,very thick,teal}]
-      \node[box] (cmd) {Command\\\term{ls}};
-      \node[box,right=1.0cm of cmd] (op) {Redirect\\\term{>}};
-      \node[box,right=1.0cm of op] (dest) {File\\\term{files.txt}};
-      \draw[arrow] (cmd)--node[above]{output} (op); \draw[arrow] (op)--(dest);
-    \end{tikzpicture}
-  \end{center}
-  \begin{columns}[T,onlytextwidth]
-    \column{.48\textwidth}
-      \begin{exampleblock}{Replace: \term{>}}
-        \term{ls > files.txt} saves the listing. Creates the file if needed; replaces old contents if it already exists.
-      \end{exampleblock}
-    \column{.48\textwidth}
-      \begin{exampleblock}{Add: \term{\textgreater\kern0pt\textgreater}}
-        \term{echo "done" \textgreater\kern0pt\textgreater files.txt} adds a line at the end and keeps existing contents.
-      \end{exampleblock}
-  \end{columns}
-  \begin{warningbox}{Check the operator before pressing Enter}
-    \term{>} overwrites the target file immediately; \term{\textgreater\kern0pt\textgreater} appends to it.
-  \end{warningbox}
 \end{frame}
 
 \section{Tab completion}
-\begin{frame}[fragile]{1.5 \; Tab completion: type less, check more}
+\begin{frame}[fragile]{Tab completion: type less, check more}
   \begin{columns}[T,onlytextwidth]
     \column{.48\textwidth}
       \begin{block}{Try it}
@@ -418,7 +511,7 @@ cd ~
 \end{frame}
 
 \section{Safety and permissions}
-\begin{frame}{1.6 \; Be careful with \term{sudo}}
+\begin{frame}{Be careful with \term{sudo}}
   \begin{warningbox}{Use elevated privileges only when needed}
     \term{sudo} runs a command with administrator privileges. A mistake can affect the whole system.
   \end{warningbox}
@@ -432,22 +525,7 @@ cd ~
   \end{exampleblock}
 \end{frame}
 
-\begin{frame}{1.7 \; Be careful even without \term{sudo}}
-  \centering
-  \begin{tikzpicture}[every node/.style={font=\small},
-    area/.style={draw=blue,rounded corners=4pt,minimum width=4.6cm,minimum height=2cm,align=center},
-    safe/.style={area,fill=teal!10}, personal/.style={area,fill=amber!16}]
-    \node[safe] (system) {System folders\\[4pt]Protected from many everyday edits\\\textit{Still, do not modify without instructions}};
-    \node[personal,right=1cm of system] (home) {Your home folder\\[4pt]\term{/home/your-name}\\\textit{Your account can change or delete files here}};
-    \draw[->,very thick,blue] (system)--node[above]{regular account} (home);
-  \end{tikzpicture}
-  \vspace{0.45cm}
-  \begin{warningbox}{Your home folder is yours to change}
-    \term{rm} does not need \term{sudo} to delete files you own. Before a change, check the target with \term{pwd} and \term{ls}.
-  \end{warningbox}
-\end{frame}
-
-\begin{frame}{1.8 \; File permissions: leave system ownership alone}
+\begin{frame}{File permissions: leave system ownership alone}
   \centering
   \begin{tikzpicture}[every node/.style={font=\small},
     role/.style={draw=blue,fill=paper,rounded corners=3pt,minimum width=2.65cm,minimum height=1.2cm,align=center}]
@@ -467,7 +545,7 @@ cd ~
 \end{frame}
 
 \section{Nautilus}
-\begin{frame}[fragile]{1.9 \; Nautilus: browse files with a GUI}
+\begin{frame}[fragile]{Nautilus: browse files with a GUI}
   \begin{columns}[T,onlytextwidth]
     \column{.45\textwidth}
       \begin{itemize}
@@ -486,7 +564,7 @@ cd ~
         \node[anchor=west] at (.25,1.55) {Home};
         \node[anchor=west] at (.25,1.1) {Documents};
         \node[anchor=west] at (2.4,1.55) {terminal\_practice};
-        \node[anchor=west] at (2.4,1.1) {notes.txt};
+        \node[anchor=west] at (2.4,1.1) {test.txt};
         \node[anchor=west,color=muted] at (.25,.35) {Visual view of the same folders};
       \end{tikzpicture}
       \begin{lstlisting}
@@ -534,7 +612,7 @@ man ls               # detailed manual; q quits
     \term{command -v python3} prints the executable path if Python is installed. If a command is unknown, check its spelling, installation, and shell \term{PATH}.
   \end{block}
   \begin{exampleblock}{Try this}
-    Compare \term{ls --help} with \term{man ls}. Find the option for showing hidden files.
+    Compare \term{ls -\kern0pt-help} with \term{man ls}. Find the option for showing hidden files.
   \end{exampleblock}
 \end{frame}
 
@@ -561,14 +639,15 @@ cd ~                # return home
 \begin{frame}[fragile]{Create, copy, move, and remove files}
   \begin{lstlisting}
 cd ~/linux_lab
-touch notes.txt
-cp notes.txt notes_copy.txt  # duplicate a file
-mv notes_copy.txt old.txt    # rename or move a file
-ls
-rm old.txt                 # remove only this practice file
+mkdir -p backup archive
+touch test.txt
+cp test.txt backup/test.txt         # copy to backup
+mv backup/test.txt archive/test.txt # move the copy
+ls archive
+rm archive/test.txt                # remove the copy
   \end{lstlisting}
   \begin{block}{Predict the listing}
-    Before \term{rm}, \term{ls} shows \term{notes.txt}, \term{old.txt}, and \term{src}. After \term{rm}, \term{old.txt} is gone.
+    \term{ls archive} shows the copied \term{test.txt}. After \term{rm}, only the original in \term{linux\_lab} remains.
   \end{block}
   \begin{warningbox}{Check the exact target}
     \term{rm} acts immediately. Use \term{pwd} and \term{ls} before removal. A directory needs \term{rm -r}; never use that option casually.
@@ -577,17 +656,17 @@ rm old.txt                 # remove only this practice file
 
 \begin{frame}[fragile]{Read and search text files}
   \begin{lstlisting}
-printf 'alpha\nbeta\nalpha again\n' > ~/linux_lab/notes.txt
-cat ~/linux_lab/notes.txt
-grep 'alpha' ~/linux_lab/notes.txt
-wc -l ~/linux_lab/notes.txt
-less ~/linux_lab/notes.txt  # press q to quit
+printf 'alpha\nbeta\nalpha again\n' > ~/linux_lab/test.txt
+cat ~/linux_lab/test.txt
+grep 'alpha' ~/linux_lab/test.txt
+wc -l ~/linux_lab/test.txt
+less ~/linux_lab/test.txt  # press q to quit
   \end{lstlisting}
   \begin{exampleblock}{Expected result}
     \term{grep} returns two matching lines; \term{wc -l} reports three lines. \term{less} lets you scroll through a longer file.
   \end{exampleblock}
   \begin{hintblock}
-    \term{head -n 5 file.txt} shows the first five lines; \term{tail -n 5 file.txt} shows the last five.
+    \term{head -n 5 test.txt} shows the first five lines; \term{tail -n 5 test.txt} shows the last five.
   \end{hintblock}
 \end{frame}
 
@@ -609,7 +688,7 @@ grep -R 'alpha' .          # search text in this tree
 \begin{frame}[fragile]{Quote paths and arguments with spaces}
   \begin{lstlisting}
 mkdir -p ~/linux_lab/'My Files'
-touch ~/linux_lab/'My Files'/report.txt
+touch ~/linux_lab/'My Files'/test.txt
 cd ~/linux_lab/'My Files'
 pwd
   \end{lstlisting}
@@ -702,9 +781,9 @@ kill %1           # stop job 1 from this shell
   \begin{lstlisting}
 cd ~/linux_lab
 ls | sort             # send output into another command
-ls > files.txt        # create or replace a file
-ls >> files.txt       # append to the file
-ls | tee listing.txt  # show and save at the same time
+ls > test.txt        # create or replace a file
+ls >> test.txt       # append to the file
+ls | tee test.txt  # show and save at the same time
   \end{lstlisting}
   \begin{columns}[T,onlytextwidth]
     \column{.48\textwidth}
@@ -713,7 +792,7 @@ ls | tee listing.txt  # show and save at the same time
       \end{block}
     \column{.48\textwidth}
       \begin{warningbox}{\term{>} replaces data}
-        It does not ask before overwriting an existing file. \term{\textgreater\kern0pt\textgreater} adds lines instead.
+        It does not ask before overwriting an existing file. \term{>>} adds lines instead.
       \end{warningbox}
   \end{columns}
 \end{frame}
@@ -721,7 +800,8 @@ ls | tee listing.txt  # show and save at the same time
 \begin{frame}[fragile]{Errors and logs: capture evidence}
   \begin{lstlisting}
 cd ~/linux_lab
-ls missing.txt 2> errors.log  # save error output
+# Assume the folder missing does not exist
+ls missing/test.txt 2> errors.log  # save error output
 cat errors.log
 tail -n 10 errors.log       # last ten lines
   \end{lstlisting}
@@ -830,7 +910,7 @@ ls -lah src run.log
 
 \begin{frame}{Linux readiness checklist}
   \begin{enumerate}
-    \item I can check my Ubuntu version and get command help: \term{cat /etc/os-release}, \term{--help}.
+    \item I can check my Ubuntu version and get command help: \term{cat /etc/os-release}, \term{-\kern0pt-help}.
     \item I can navigate and inspect files: \term{pwd}, \term{cd}, \term{ls}, \term{find}.
     \item I can edit, search, and route text: \term{nano}, \term{grep}, \term{|}, \term{>}, \term{tee}.
     \item I can install an Ubuntu package with \term{apt} when needed.
@@ -842,17 +922,17 @@ ls -lah src run.log
 
 \begin{frame}[shrink=2]{Practice check: can you explain each command?}
   \begin{block}{Read first, then predict what happens}
-    \centering\term{cd \textasciitilde{}} \;\(\rightarrow\)\; \term{mkdir demo} \;\(\rightarrow\)\; \term{cd demo} \;\(\rightarrow\)\; \term{touch note.txt} \;\(\rightarrow\)\; \term{ls}
+    \centering\term{cd \textasciitilde{}} \;\(\rightarrow\)\; \term{mkdir demo} \;\(\rightarrow\)\; \term{cd demo} \;\(\rightarrow\)\; \term{touch test.txt} \;\(\rightarrow\)\; \term{ls}
   \end{block}
   \begin{enumerate}
     \item Which command moves you to the home folder?
     \item What does \term{touch} do in this example?
     \item What should \term{ls} display?
-    \item Which operator appends output: \term{>} or \term{\textgreater\kern0pt\textgreater}?
+    \item Which operator appends output: \term{>} or \term{>>}?
     \item Why should you check the target before running \term{rm -r}?
   \end{enumerate}
   \begin{exampleblock}{Expected result}
-    \term{ls} should show \term{note.txt}. The \term{\textgreater\kern0pt\textgreater} operator appends. \term{rm -r} can permanently remove its target, so inspect the path and name first.
+    \term{ls} should show \term{test.txt}. The \term{>>} operator appends. \term{rm -r} can permanently remove its target, so inspect the path and name first.
   \end{exampleblock}
 \end{frame}
 
@@ -876,12 +956,9 @@ ls -lah src run.log
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Sources and next reading}
-  \begin{block}{Chapter basis}
-    Sections 1.1--1.9 and the twelve-command table are adapted from the supplied \emph{Ubuntu Terminal Basics} chapter.
-  \end{block}
+\begin{frame}{Built-in help and further practice}
   \begin{block}{Built-in references}
-    Try \term{man bash}, \term{man ls}, \term{man chmod}, and a program's \term{--help} option.\\[4pt]
+    Try \term{man bash}, \term{man ls}, \term{man chmod}, and a program's \term{-\kern0pt-help} option.\\[4pt]
     The file and script exercises use the \term{\textasciitilde{}/linux\_lab} practice folder; package management is shown separately.
   \end{block}
   \begin{hintblock}
