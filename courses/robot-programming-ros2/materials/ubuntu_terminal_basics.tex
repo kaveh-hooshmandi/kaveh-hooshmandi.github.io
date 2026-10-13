@@ -356,11 +356,11 @@ ls
     \draw[link] (practice)--node[above]{\term{touch}} (file);
   \end{tikzpicture}
   \vspace{.5cm}
-  \begin{block}{Absolute path vs. current location}
-    \term{/home/your-name/terminal\_practice} describes the full route. After \term{cd terminal\_practice}, the shorter name works because that folder is now the current location.
+  \begin{block}{Absolute, relative, and Home-relative paths}
+    \term{/home/student/terminal\_practice} is an absolute path (it starts at \term{/}). From Home, \term{cd terminal\_practice} uses a relative path (it starts here); \term{cd \textasciitilde{}/terminal\_practice} starts from Home even if you are elsewhere.
   \end{block}
   \begin{alertblock}{Check before changing files}
-    Run \term{pwd} to confirm your location and \term{ls} to inspect its contents.
+    \term{cd ..} moves to the parent folder; \term{cd .} stays in the current folder. Run \term{pwd} to confirm your location and \term{ls} to inspect its contents.
   \end{alertblock}
 \end{frame}
 
@@ -384,25 +384,14 @@ ls > test.txt
   \end{warningbox}
 \end{frame}
 
-\begin{frame}[fragile]{Open a folder and run a Python file}
-  \begin{columns}[T,onlytextwidth]
-    \column{.48\textwidth}
-      \begin{block}{Open folders on the desktop}
-        \begin{lstlisting}
-xdg-open .
-xdg-open ~/
-        \end{lstlisting}
-        \term{xdg-open .} (opens the current folder); \term{xdg-open \textasciitilde{}/} (opens Home). These examples need a graphical desktop.
-      \end{block}
-    \column{.48\textwidth}
-      \begin{block}{Create and run a Python file}
-        \begin{lstlisting}
+\begin{frame}[fragile]{Create and run a Python file}
+  \begin{block}{Try these commands}
+    \begin{lstlisting}
 echo 'print("Hello")' > test.py
 python3 test.py
-        \end{lstlisting}
-        \term{echo} (prints the code); \term{>} (saves it to \term{test.py}); \term{python3 test.py} (runs the file and prints \term{Hello}).
-      \end{block}
-  \end{columns}
+    \end{lstlisting}
+    \term{echo} (prints the code); \term{>} (saves it to \term{test.py}); \term{python3 test.py} (runs the file and prints \term{Hello}).
+  \end{block}
   \begin{hintblock}
     Continue in \term{\textasciitilde{}/terminal\_practice}. Run \term{pwd} (check your location) and \term{ls} (check the files) before running the script. Python 3 must be installed.
   \end{hintblock}
@@ -510,131 +499,7 @@ hi
   \end{columns}
 \end{frame}
 
-\section{Safety and permissions}
-\begin{frame}{Be careful with \term{sudo}}
-  \begin{warningbox}{Use elevated privileges only when needed}
-    \term{sudo} runs a command with administrator privileges. A mistake can affect the whole system.
-  \end{warningbox}
-  \begin{itemize}
-    \item In this course, use \term{sudo} for system-wide package installation when instructed.
-    \item Do not add \term{sudo} just to make an error message disappear.
-    \item Read the command and its target before entering your password.
-  \end{itemize}
-  \begin{exampleblock}{Expected course pattern}
-    A package installation may need \term{sudo apt install ...}; ordinary work in your project folder should not.
-  \end{exampleblock}
-\end{frame}
-
-\begin{frame}{File permissions: leave system ownership alone}
-  \centering
-  \begin{tikzpicture}[every node/.style={font=\small},
-    role/.style={draw=blue,fill=paper,rounded corners=3pt,minimum width=2.65cm,minimum height=1.2cm,align=center}]
-    \node[role] (owner) {Owner\\Can read / write / run};
-    \node[role,right=.45cm of owner] (group) {Group\\Access depends on rules};
-    \node[role,right=.45cm of group] (other) {Others\\Access depends on rules};
-  \end{tikzpicture}
-  \vspace{.45cm}
-  \begin{itemize}
-    \item Permissions decide who may read, change, or run a file.
-    \item Saving a file as administrator may make it owned by the administrator account.
-    \item Then your normal account may be unable to edit it or launch desktop tools that need it.
-  \end{itemize}
-  \begin{warningbox}{Beginner rule}
-    Avoid experimenting with \term{chmod} (change permissions), \term{chown} (change ownership), or administrator-mode editors. Follow a specific, trusted instruction if a permission change is ever required.
-  \end{warningbox}
-\end{frame}
-
-\section{Nautilus}
-\begin{frame}[fragile]{Nautilus: browse files with a GUI}
-  \begin{columns}[T,onlytextwidth]
-    \column{.45\textwidth}
-      \begin{itemize}
-        \item Nautilus is Ubuntu's default file manager, similar to File Explorer or Finder.
-        \item Open the folder you are already working in, then use the visual browser to inspect files.
-      \end{itemize}
-      \begin{hintblock}
-        The dot \term{.} is a path shortcut for the current folder.
-      \end{hintblock}
-    \column{.52\textwidth}
-      \begin{tikzpicture}[every node/.style={font=\small}]
-        \draw[rounded corners=4pt,thick,blue,fill=paper] (0,0) rectangle (5,2.4);
-        \fill[ink] (0,1.95) rectangle (5,2.4);
-        \fill[red!75] (.22,2.15) circle (.07); \fill[amber] (.48,2.15) circle (.07); \fill[teal] (.74,2.15) circle (.07);
-        \node[anchor=west,text=white] at (1,2.15) {Files -- Home};
-        \node[anchor=west] at (.25,1.55) {Home};
-        \node[anchor=west] at (.25,1.1) {Documents};
-        \node[anchor=west] at (2.4,1.55) {terminal\_practice};
-        \node[anchor=west] at (2.4,1.1) {test.txt};
-        \node[anchor=west,color=muted] at (.25,.35) {Visual view of the same folders};
-      \end{tikzpicture}
-      \begin{lstlisting}
-cd ~
-nautilus .
-      \end{lstlisting}
-      \small \term{cd \textasciitilde{}} moves to Home; \term{nautilus .} opens it in the file browser.
-  \end{columns}
-\end{frame}
-
-\section{Linux workflow for development}
-\begin{frame}[fragile]{A repeatable Linux workflow}
-  \begin{center}
-    \begin{tikzpicture}[every node/.style={font=\small},
-      stagebox/.style={draw=blue,fill=paper,rounded corners=3pt,minimum width=2.1cm,minimum height=.9cm,align=center},
-      arrow/.style={->,thick,teal}]
-      \node[stagebox] (start) {Check the\\system};
-      \node[stagebox,right=.28cm of start] (navigate) {Navigate\\folders};
-      \node[stagebox,right=.28cm of navigate] (edit) {Edit files};
-      \node[stagebox,right=.28cm of edit] (run) {Run a\\program};
-      \node[stagebox,right=.28cm of run] (inspect) {Inspect\\results};
-      \draw[arrow] (start)--(navigate); \draw[arrow] (navigate)--(edit);
-      \draw[arrow] (edit)--(run); \draw[arrow] (run)--(inspect);
-    \end{tikzpicture}
-  \end{center}
-  \begin{lstlisting}
-mkdir -p ~/linux_lab/src
-cd ~/linux_lab
-pwd
-  \end{lstlisting}
-  \begin{hintblock}
-    This creates a safe practice folder in your Home directory. In the following examples, \term{linux\_lab} is your own small project.
-  \end{hintblock}
-\end{frame}
-
-\begin{frame}[fragile]{Identify the system and get help}
-  \begin{lstlisting}
-cat /etc/os-release  # distribution and version
-echo "$SHELL"        # login shell
-command -v python3  # path to a program
-python3 --help       # program options
-man ls               # detailed manual; q quits
-  \end{lstlisting}
-  \begin{block}{Read the answer}
-    \term{command -v python3} prints the executable path if Python is installed. If a command is unknown, check its spelling, installation, and shell \term{PATH}.
-  \end{block}
-  \begin{exampleblock}{Try this}
-    Compare \term{ls -\kern0pt-help} with \term{man ls}. Find the option for showing hidden files.
-  \end{exampleblock}
-\end{frame}
-
-\begin{frame}[fragile]{Paths: absolute, relative, and special names}
-  \begin{lstlisting}
-cd ~/linux_lab/src  # home-relative path
-pwd                 # absolute path, starting with /
-cd ..               # move to parent folder
-cd .                # stay in current folder
-cd ~                # return home
-  \end{lstlisting}
-  \begin{columns}[T,onlytextwidth]
-    \column{.48\textwidth}
-      \begin{block}{Absolute path}
-        Starts with \term{/}. Example: \term{/home/student/linux\_lab/src} identifies the same place from anywhere.
-      \end{block}
-    \column{.48\textwidth}
-      \begin{hintblock}
-        \term{.} means here; \term{..} means parent; \term{\textasciitilde{}} means your Home directory.
-      \end{hintblock}
-  \end{columns}
-\end{frame}
+\section{Linux tools and commands}
 
 \begin{frame}[fragile]{Create, copy, move, and remove files}
   \begin{lstlisting}
@@ -654,50 +519,18 @@ rm archive/test.txt                # remove the copy
   \end{warningbox}
 \end{frame}
 
-\begin{frame}[fragile]{Read and search text files}
-  \begin{lstlisting}
-printf 'alpha\nbeta\nalpha again\n' > ~/linux_lab/test.txt
-cat ~/linux_lab/test.txt
-grep 'alpha' ~/linux_lab/test.txt
-wc -l ~/linux_lab/test.txt
-less ~/linux_lab/test.txt  # press q to quit
-  \end{lstlisting}
-  \begin{exampleblock}{Expected result}
-    \term{grep} returns two matching lines; \term{wc -l} reports three lines. \term{less} lets you scroll through a longer file.
-  \end{exampleblock}
-  \begin{hintblock}
-    \term{head -n 5 test.txt} shows the first five lines; \term{tail -n 5 test.txt} shows the last five.
-  \end{hintblock}
-\end{frame}
-
 \begin{frame}[fragile]{Find files and use patterns carefully}
   \begin{lstlisting}
 cd ~/linux_lab
 find . -name '*.txt'       # search this tree
 ls *.txt                   # list matching names here
-grep -R 'alpha' .          # search text in this tree
   \end{lstlisting}
   \begin{block}{What the star means}
     In \term{ls *.txt}, Bash expands \term{*.txt} to matching filenames before \term{ls} runs. In \term{find}, the quoted pattern is passed to the program.
   \end{block}
-  \begin{warningbox}{Inspect a pattern before deletion}
-    First run \term{ls *.txt}. Then, if you really mean every match, use a command that changes files. Patterns can match more than you expect.
+  \begin{warningbox}{Preview before deleting}
+    If \term{ls *.txt} prints \term{test.txt}, then \term{rm *.txt} deletes it. If several text files match, it deletes all of them. Use \term{rm test.txt} only after confirming that exact target.
   \end{warningbox}
-\end{frame}
-
-\begin{frame}[fragile]{Quote paths and arguments with spaces}
-  \begin{lstlisting}
-mkdir -p ~/linux_lab/'My Files'
-touch ~/linux_lab/'My Files'/test.txt
-cd ~/linux_lab/'My Files'
-pwd
-  \end{lstlisting}
-  \begin{block}{Why quotes matter}
-    Without quotes, Bash treats \term{My} and \term{Files} as separate arguments. The single quotes keep them together as one path.
-  \end{block}
-  \begin{hintblock}
-    Tab completion can insert the needed escape characters for a filename with spaces.
-  \end{hintblock}
 \end{frame}
 
 \begin{frame}[fragile]{Install Ubuntu packages with \term{apt}}
@@ -711,39 +544,53 @@ sudo apt install git # install the selected package
     \term{update} refreshes the package index; \term{install} changes the system. \term{sudo} is needed for system package changes, so read the package name first.
   \end{block}
   \begin{hintblock}
-    \term{apt list --installed git} checks whether \term{git} is installed. Package availability depends on configured repositories.
+    \term{apt list -\kern0pt-installed git} checks whether \term{git} is installed. Package availability depends on configured repositories.
   \end{hintblock}
 \end{frame}
 
 \begin{frame}[fragile]{Environment variables: settings in a shell}
   \begin{lstlisting}
-echo "$HOME"                        # home directory
-echo "$PATH"                        # program search path
-export PROJECT_DIR="$HOME/linux_lab" # set a variable
-echo "$PROJECT_DIR"
-printenv | grep PROJECT_DIR
+echo "$HOME"                       # home directory
+echo "$PATH"                       # program search path
+mkdir -p "$HOME/My Project"
+export PROJECT_DIR="$HOME/My Project"
+cd "$PROJECT_DIR"
+pwd
   \end{lstlisting}
-  \begin{block}{What changed?}
-    \term{export} makes \term{PROJECT\_DIR} available to programs started by this shell. A separate terminal does not inherit changes made afterward in this one.
+  \begin{block}{Why are there quotation marks?}
+    Quotes keep the space in \term{My Project} inside one path. \term{cd "\$PROJECT\_DIR"} passes that full path as one argument to \term{cd}; \term{pwd} displays the location, for example \term{/home/kaveh/My Project}.
+    \term{export} makes \term{PROJECT\_DIR} available to programs started by this shell; a separate terminal does not inherit it.
   \end{block}
-  \begin{hintblock}
-    Quotes around \term{"\$PROJECT\_DIR"} keep a value containing spaces together as one argument.
-  \end{hintblock}
 \end{frame}
 
-\begin{frame}[fragile]{\term{source} and \term{.bashrc}: current vs. new shells}
-  \begin{lstlisting}
-cd ~/linux_lab
-printf 'export DEMO_MODE=ready\n' > demo_env.sh
+\begin{frame}[fragile]{Shell scripts: .sh files, bash, and source}
+  A \term{.sh} file is a text file containing Shell commands that run in order.
+  \begin{columns}[T,onlytextwidth]
+    \column{.47\textwidth}
+      \begin{block}{Example file: \term{demo\_env.sh}}
+        \begin{lstlisting}
+export DEMO_MODE=ready
+echo "Hello"
+        \end{lstlisting}
+      \end{block}
+      \begin{exampleblock}{Run it in a separate Bash process}
+        \begin{lstlisting}
+bash demo_env.sh
+        \end{lstlisting}
+        Prints \term{Hello}. Its exported variable does not remain in the current shell.
+      \end{exampleblock}
+    \column{.49\textwidth}
+      \begin{block}{Run it in the current shell}
+        \begin{lstlisting}
 source ./demo_env.sh
-echo "$DEMO_MODE"  # expected: ready
-  \end{lstlisting}
-  \begin{block}{Why \term{source} is different}
-    It runs the script in the current shell, so the variable remains available there. Running the script as a separate process would not modify the parent shell.
-  \end{block}
-  \begin{hintblock}
-    Bash reads \term{\textasciitilde{}/.bashrc} when an interactive shell opens. Put only intentional, reviewed startup commands in it.
-  \end{hintblock}
+echo "$DEMO_MODE"
+        \end{lstlisting}
+        Prints \term{Hello}, then \term{ready}. The variable remains available in this shell.
+      \end{block}
+      \begin{hintblock}
+        Bash reads \term{\textasciitilde{}/.bashrc} when an interactive shell opens. Add only startup commands you intend to run each time.
+      \end{hintblock}
+  \end{columns}
 \end{frame}
 
 \begin{frame}[fragile]{Permissions: read, write, and execute}
@@ -757,24 +604,54 @@ chmod u+x check.sh
   \begin{block}{Read \term{chmod u+x}}
     \term{u} means the file's owner; \term{+x} adds execute permission for that owner. \term{./check.sh} runs the script in the current folder.
   \end{block}
-  \begin{warningbox}{Make only the needed change}
-    Avoid \term{chmod 777} and arbitrary \term{chown} commands. Inspect \term{ls -l} and the error message first.
-  \end{warningbox}
 \end{frame}
 
-\begin{frame}[fragile]{Processes: start, observe, and stop}
+\begin{frame}[fragile]{Shebang: which program runs a script?}
+  \begin{columns}[T,onlytextwidth]
+    \column{.48\textwidth}
+      \begin{block}{Inside \term{check.sh}}
+        \begin{lstlisting}
+#!/usr/bin/env bash
+echo ready
+        \end{lstlisting}
+        The first line is a \emph{shebang}. Linux starts \term{env}, which finds Bash in \term{PATH}. Bash reads \term{echo ready} and prints \term{ready}.
+      \end{block}
+      \begin{exampleblock}{Run the file directly}
+        \begin{lstlisting}
+./check.sh
+        \end{lstlisting}
+        This uses the shebang. First make the file executable with \term{chmod u+x check.sh}.
+      \end{exampleblock}
+    \column{.48\textwidth}
+      \begin{block}{Name Bash yourself}
+        \begin{lstlisting}
+bash check.sh
+        \end{lstlisting}
+        Bash reads the file directly. The shebang is a comment; the file needs read permission, but not execute permission.
+      \end{block}
+      \begin{hintblock}
+        For Python code, use \term{\#!/usr/bin/env python3} and write \term{print("ready")}. Bash scripts can use \term{echo}, \term{export}, \term{if}, and \term{for}.
+      \end{hintblock}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Processes: run and stop a node}
   \begin{lstlisting}
-sleep 30          # runs in the foreground; Ctrl+C stops it
-sleep 30 &        # runs in the background
-jobs              # show shell jobs
-kill %1           # stop job 1 from this shell
+ros2 run turtlesim turtlesim_node   # foreground: press Ctrl+C
+ros2 run turtlesim turtlesim_node & # background: prompt returns
+jobs                                # jobs in this terminal
+kill %1                             # stop job 1 (check jobs first)
   \end{lstlisting}
-  \begin{block}{Foreground vs. background}
-    A foreground command occupies the terminal until it ends or you stop it. A trailing \term{\&} returns the prompt while the command runs.
-  \end{block}
-  \begin{hintblock}
-    \term{ps -ef | grep sleep} can help find a process. A new terminal has its own job list.
-  \end{hintblock}
+  \begin{columns}[T,onlytextwidth]
+    \column{.48\textwidth}
+      \begin{block}{Foreground and background}
+        The first command holds this terminal; \key{Ctrl+C} is the usual way to stop it. With \term{\&}, the prompt returns. \term{jobs} lists jobs of this shell; use the number it shows, such as \term{\%1}.
+      \end{block}
+    \column{.48\textwidth}
+      \begin{block}{A PID is not a job number}
+        \term{pgrep -af turtlesim} or \term{ps -ef | grep turtlesim} finds a process ID. \term{kill 12345} sends a normal stop request; replace \term{12345} with the real PID.
+      \end{block}
+  \end{columns}
 \end{frame}
 
 \begin{frame}[fragile]{Pipes and redirections: route program output}
@@ -808,9 +685,6 @@ tail -n 10 errors.log       # last ten lines
   \begin{block}{Two output streams}
     Normal output goes to standard output; error messages go to standard error. \term{2>} redirects errors to a file, while \term{>} redirects normal output.
   \end{block}
-  \begin{hintblock}
-    \term{tail -f app.log} follows a growing log. Press \key{Ctrl+C} to stop following it.
-  \end{hintblock}
 \end{frame}
 
 \begin{frame}[fragile]{Git: track changes in a project folder}
@@ -822,12 +696,18 @@ git status
 git add README.md
 git status
   \end{lstlisting}
-  \begin{block}{What to observe}
-    The first \term{git status} shows an untracked file. After \term{git add}, it shows the file staged. No commit is made in this example.
-  \end{block}
-  \begin{hintblock}
-    When using someone else's repository, read its README and check the branch before editing or building.
-  \end{hintblock}
+  \begin{columns}[T,onlytextwidth]
+    \column{.52\textwidth}
+      \begin{block}{Read the two status results}
+        The first \term{git status} shows \term{README.md} as Untracked. After \term{git add README.md}, the second status shows \emph{Changes to be committed}: the file is Staged, but no commit exists yet.
+      \end{block}
+    \column{.44\textwidth}
+      \begin{exampleblock}{Commit and check the branch}
+        \term{git commit -m "Add README"} records the staged change. Before editing or building someone else's repository, read its README and check the branch with \term{git branch} or \term{git status}.
+      \end{exampleblock}
+  \end{columns}
+  \vspace{.12cm}
+  \centering\small \term{Untracked} $\longrightarrow$ \term{Staged} $\longrightarrow$ \term{Committed}
 \end{frame}
 
 \begin{frame}[fragile]{Python projects: isolate dependencies}
@@ -859,6 +739,29 @@ ping -c 3 127.0.0.1  # test the local network stack
   \end{block}
   \begin{hintblock}
     When two machines must communicate, record both addresses and verify each can reach the other before debugging the application.
+  \end{hintblock}
+\end{frame}
+
+\begin{frame}[fragile]{SSH: open a terminal on another computer}
+  \begin{lstlisting}
+ssh student@192.168.1.42
+# After login, on the remote computer:
+whoami
+hostname
+exit
+  \end{lstlisting}
+  \begin{columns}[T,onlytextwidth]
+    \column{.48\textwidth}
+      \begin{block}{Read the connection command}
+        \term{ssh user@host} opens an encrypted shell on the target. Here \term{student} is its user; \term{192.168.1.42} is an example IP.
+      \end{block}
+    \column{.48\textwidth}
+      \begin{exampleblock}{Check where you are}
+        \term{whoami} and \term{hostname} confirm the remote user and machine. \term{exit} returns to your local terminal.
+      \end{exampleblock}
+  \end{columns}
+  \begin{hintblock}
+    The target needs an SSH server and must allow your login. Replace the example user and IP; confirm the target's identity on first connection.
   \end{hintblock}
 \end{frame}
 
@@ -898,10 +801,9 @@ cd ~/linux_lab
 printf 'print("hello from Linux")\n' > src/hello.py
 python3 src/hello.py | tee run.log
 grep 'hello' run.log
-ls -lah src run.log
   \end{lstlisting}
   \begin{block}{Expected result}
-    Python prints \term{hello from Linux}; \term{tee} saves the same line in \term{run.log}; \term{grep} finds that line. \term{ls} confirms the script and log exist.
+    Python prints \term{hello from Linux}; \term{tee} saves the same line in \term{run.log}; \term{grep} finds that line.
   \end{block}
   \begin{exampleblock}{Explain each step}
     Which command created a folder? Which wrote a file? Which ran a program? Which showed and saved the result?
@@ -910,7 +812,6 @@ ls -lah src run.log
 
 \begin{frame}{Linux readiness checklist}
   \begin{enumerate}
-    \item I can check my Ubuntu version and get command help: \term{cat /etc/os-release}, \term{-\kern0pt-help}.
     \item I can navigate and inspect files: \term{pwd}, \term{cd}, \term{ls}, \term{find}.
     \item I can edit, search, and route text: \term{nano}, \term{grep}, \term{|}, \term{>}, \term{tee}.
     \item I can install an Ubuntu package with \term{apt} when needed.
@@ -954,16 +855,6 @@ ls -lah src run.log
     \item Remember that each terminal has its own variables and running jobs; use \key{Ctrl+C} to stop a foreground command.
     \item Diagnose failures through error text, logs, paths, processes, and permissions.
   \end{itemize}
-\end{frame}
-
-\begin{frame}{Built-in help and further practice}
-  \begin{block}{Built-in references}
-    Try \term{man bash}, \term{man ls}, \term{man chmod}, and a program's \term{-\kern0pt-help} option.\\[4pt]
-    The file and script exercises use the \term{\textasciitilde{}/linux\_lab} practice folder; package management is shown separately.
-  \end{block}
-  \begin{hintblock}
-    Read each command and its expected effect before running it, especially commands that install packages or remove files.
-  \end{hintblock}
 \end{frame}
 
 \begin{frame}{Presenter and contact}
