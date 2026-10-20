@@ -24,6 +24,8 @@ author_profile: true
 
 ## Course-specific materials
 
-The supported ROS 2 distribution is **{{ site.data.ros2_course.ros_distribution }}**. Installation steps, slide decks, starter code, datasets, and software requirements will be added here when confirmed.
+- [Getting Started with ROS 2 Jazzy (PDF)](/courses/robot-programming-ros2/materials/ros2_installation.pdf) — installation on Ubuntu 24.04, development tools, and first examples.
+
+Additional slide decks, starter code, datasets, and software requirements will be added here as they become available.
 
 Check the [Schedule](/courses/robot-programming-ros2/schedule/) for session materials as they are published.
