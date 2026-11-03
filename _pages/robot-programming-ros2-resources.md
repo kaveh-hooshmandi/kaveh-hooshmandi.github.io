@@ -25,6 +25,7 @@ author_profile: true
 ## Course-specific materials
 
 - [Getting Started with ROS 2 Jazzy (PDF)](/courses/robot-programming-ros2/materials/ros2_installation.pdf) — installation on Ubuntu 24.04, development tools, and first examples.
+- [ROS 2 Introduction: Andino Lab (PDF)](/courses/robot-programming-ros2/materials/ros2_introduction.pdf) — 39 slides covering Docker setup, Gazebo simulation, ROS 2 topics, camera visualization in RViz, and TF coordinate frames.
 
 Additional slide decks, starter code, datasets, and software requirements will be added here as they become available.
 

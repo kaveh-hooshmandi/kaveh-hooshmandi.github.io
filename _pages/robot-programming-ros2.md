@@ -32,6 +32,8 @@ New to the Ubuntu command line? Start with [Ubuntu Terminal Basics (PDF)](/cours
 
 For the ROS 2 setup and first examples, see [Getting Started with ROS 2 Jazzy (PDF)](/courses/robot-programming-ros2/materials/ros2_installation.pdf).
 
+Continue with [ROS 2 Introduction: Andino Lab (PDF)](/courses/robot-programming-ros2/materials/ros2_introduction.pdf) for Gazebo simulation, topic commands, camera visualization in RViz, and coordinate frames.
+
 ## What you will learn
 
 The planned learning outcomes are to:
