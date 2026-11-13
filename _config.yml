@@ -168,6 +168,7 @@ include:
   - files
 
 exclude:
+  - courses/robot-programming-ros2/RMPC_F1TENTH
   - "*.sublime-project"
   - "*.sublime-workspace"
   - .asset-cache
