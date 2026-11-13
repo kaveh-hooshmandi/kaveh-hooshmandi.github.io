@@ -1,0 +1,43 @@
+name: jamris-rmpc
+services:
+  stack:
+    image: jamris-rmpc-f1tenth:local
+    pull_policy: never
+    hostname: ${RMPC_HOSTNAME:-localhost}
+    network_mode: host
+    init: true
+    environment:
+      DISPLAY: ${DISPLAY:-:0}
+      XAUTHORITY: /tmp/rmpc.Xauthority
+      QT_X11_NO_MITSHM: "1"
+      NVIDIA_VISIBLE_DEVICES: all
+      NVIDIA_DRIVER_CAPABILITIES: compute,utility,graphics,display
+      ROS_DOMAIN_ID: "67"
+      ROS_LOCALHOST_ONLY: "1"
+    volumes:
+      - type: bind
+        source: /tmp/.X11-unix
+        target: /tmp/.X11-unix
+        read_only: true
+      - type: bind
+        source: ${RMPC_XAUTHORITY:-/dev/null}
+        target: /tmp/rmpc.Xauthority
+        read_only: true
+        bind:
+          create_host_path: false
+      - ./config:/project/config:ro
+      - ./launch:/project/launch:ro
+      - ./scripts:/project/scripts:ro
+      - ./experiments:/project/experiments
+      - ./src/rmpc_f1tenth/maps:/sim_ws/install/f1tenth_gym_ros/share/f1tenth_gym_ros/maps:ro
+      - ./src/rmpc_f1tenth/maps:/rmpc_ws/install/rmpc_f1tenth/share/rmpc_f1tenth/maps:ro
+      - ./telemetry:/data/telemetry
+      - ./results:/rmpc_ws/src/rmpc_f1tenth/results
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    command: ["sleep", "infinity"]

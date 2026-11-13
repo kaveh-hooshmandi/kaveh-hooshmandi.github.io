@@ -1,0 +1,131 @@
+% Technical development based on IV2025_arun.pdf and the pinned implementation.
+\subsection{Dynamic Bicycle Model and Tire Forces}
+The full-scale formulation in Sections~III--IV of \cite{muraleedharan2025racing} uses a dynamic bicycle model in a Frenet frame. Each axle represents the combined action of its two tires. Progress $s$, lateral offset $d$, heading error $e_\psi$, body-frame velocities $v_x,v_y$, and yaw rate $r$ describe motion. With path curvature $\kappa(s)$, steering angle $\delta$, mass $m$, yaw inertia $I_z$, and axle distances $l_f,l_r$, its motion equations can be written as
+\begin{equation}
+\begin{aligned}
+\dot s &= \frac{v_x\cos e_\psi-v_y\sin e_\psi}{1-d\kappa},\\
+\dot d &= v_x\sin e_\psi+v_y\cos e_\psi,\\
+\dot e_\psi &= r-\kappa\dot s,\\
+m\dot v_x &= F_{xr}-F_D-F_{yf}\sin\delta\\
+ &\quad +F_{xf}\cos\delta+mv_yr,\\
+m\dot v_y &= F_{yr}+F_{yf}\cos\delta\\
+ &\quad +F_{xf}\sin\delta-mv_xr,\\
+I_z\dot r &= l_f(F_{yf}\cos\delta+F_{xf}\sin\delta)\\
+ &\quad -l_rF_{yr}.
+\end{aligned}\label{eq:fullmodel}
+\end{equation}
+Here $F_{xi},F_{yi}$ denote longitudinal and lateral axle forces, and $F_D$ denotes aerodynamic drag. The reference article models engine force as a function of throttle, speed, and gear, and models brake force and rolling resistance separately. These powertrain terms belong to its full-scale vehicle model; they are not identified F1TENTH parameters.
+
+The F1TENTH solver uses the reduced state $\mathbf x=[s,d,e_\psi,v_y,r]^\mathsf T$ and scalar input $u=\delta$ \cite{mulakaloori2026repo,muraleedharan2026solver}. The imported solver is pinned at revision \texttt{2c25f4b}. Its forward speed is held constant during each rollout at $\bar v_x=\max(2.5,v_x^{\rm odom})$. It retains the first three equations in Eq.~\ref{eq:fullmodel} and uses
+\begin{equation}
+\begin{aligned}
+\dot v_y &= (F_{yf}\cos\delta+F_{yr})/m-\bar v_xr,\\
+\dot r &= (l_fF_{yf}\cos\delta-l_rF_{yr})/I_z.
+\end{aligned}\label{eq:reducedmodel}
+\end{equation}
+The code propagates these states by forward Euler integration, $\mathbf x_{k+1}=\mathbf x_k+\Delta t f(\mathbf x_k,\delta_k)$. Curvature and track widths come from the reference horizon, with desired lateral offset zero. Frenet coordinates require $1-d\kappa\ne0$; the model is intended for motion near the reference path.
+
+Both formulations use a Pacejka-type nonlinear lateral-force law. For the F1TENTH implementation it is
+\begin{equation}
+\begin{aligned}
+F_{yi}&=\mu F_{zi}\sin\!\left[C_i\arctan\!\left(z_i\right)\right],\\
+z_i&=B_i\alpha_i-E_i\bigl(B_i\alpha_i-\arctan(B_i\alpha_i)\bigr),\\
+\alpha_f&=\arctan\!\frac{v_y+l_fr}{v_{\rm slip}}-\delta,\\
+\alpha_r&=\arctan\!\frac{v_y-l_rr}{v_{\rm slip}}.
+\end{aligned}\label{eq:tire}
+\end{equation}
+For the configured zero aerodynamic lift coefficients, $F_{zf}=mg l_r/(l_f+l_r)$ and $F_{zr}=mg l_f/(l_f+l_r)$. Table~\ref{tab:configuration} lists the parameters used in the repository. The reference paper additionally identifies lateral-force offsets and refines its tire model with measured race-car data; those fitted full-scale values are not reused here.
+
+An implementation detail affects Eq.~\ref{eq:tire}: the imported car-steering model uses $v_{\rm slip}=\max(7.0,\bar v_x)$ in m/s. Although the outer F1TENTH header declares a 0.5~m/s constant, it delegates dynamics to the imported model, whose 7.0~m/s floor is active. Thus slip predictions below 7~m/s use a larger denominator than the measured speed. This is a code property of the pinned revision, not a physical tire law, and should be reviewed when tuning low-speed behavior.
+
+\begin{table}[htb]
+\centering
+\caption{F1TENTH settings from \texttt{config/config.yaml} in \cite{mulakaloori2026repo}. They are configuration values, not parameters measured in the full-scale paper.}
+\label{tab:configuration}
+\small
+\begin{tabular}{lr}
+\toprule
+Parameter & Value\\
+\midrule
+Mass $m$ & 3.47 kg\\
+Yaw inertia $I_z$ & 0.04712 kg\,m$^2$\\
+Front/rear axle distance & 0.15875 / 0.17145 m\\
+Wheelbase / body width & 0.3302 / 0.2032 m\\
+Friction coefficient $\mu$ & 0.523\\
+Front $(B,C,E)$ & $(-6,1.5,-0.1)$\\
+Rear $(B,C,E)$ & $(-7,1.5,-0.1)$\\
+Steering magnitude limit & 0.4189 rad\\
+Steering rate limit & 3.2 rad/s\\
+Speed range & 2.5--10.5 m/s\\
+Acceleration/deceleration & 7.51 / 8.26 m/s$^2$\\
+Stages / samples / basis modes & 100 / 5,000 / 7\\
+Rollout step / initial seed & 0.02 s / 70997\\
+Warm start & enabled\\
+Grid inflation half-width & 4 cells (0.20 m)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Frequency-Domain Sampling and Input Constraints}
+The reference article motivates IDCT sampling because independently sampled time-domain inputs can oscillate excessively \cite{muraleedharan2025racing}. Its algorithm combines steering and longitudinal-force samples before evaluating the vehicle response. The F1TENTH implementation instead evaluates 5,000 scalar steering sequences. The following explicit construction is taken from the imported solver code \cite{muraleedharan2026solver}, supplementing the conceptual description in the article.
+
+Let $N=100$ and $M=7$. Its orthonormal cosine basis is
+\begin{equation}
+ b_{ki}=\sqrt{2/N}\,c_i\cos\!\left(\frac{\pi i(k+1/2)}{N}\right),
+\end{equation}
+where $c_0=1/\sqrt{2}$ and $c_i=1$ for $i>0$. For random candidate $j$, coefficients $a_{ij}$ are drawn uniformly in $(-1,1]$. With $h=\dot\delta_{\max}\Delta t$, the increments and bounded commands are
+\begin{equation}
+\begin{aligned}
+\eta_k^{(j)} &=h\sum_{i=0}^{M-1}b_{ki}a_{ij},\\
+\delta_k^{(j)} &=\operatorname{clip}_{[-\delta_{\max},\delta_{\max}]}\!\left(
+\delta_{k-1}^{(j)}+\operatorname{clip}_{[-h,h]}\eta_k^{(j)}\right).
+\end{aligned}\label{eq:idct}
+\end{equation}
+All candidates start with the current command at $k=0$. The configured rate limit gives $h=0.064$~rad per rollout step. Using low cosine modes restricts rapid variation before clipping. Candidate zero holds the current command; when available, candidate one reuses a shifted previous best sequence under the same limits. This preserves a warm-start candidate without implying global optimality.
+
+\subsection{Tracking, Grip, and Obstacle Costs}
+The full-scale article balances tracking error, command variation, terminal error, and tire-grip penalties. In compact notation, its objective has the form
+\begin{equation}
+\begin{aligned}
+J_{\rm IV}={}&\sum_k\left(\mathbf e_k^\mathsf TQ\mathbf e_k+
+\Delta\mathbf u_k^\mathsf TR\Delta\mathbf u_k\right)\\
+&+\mathbf e_N^\mathsf TQ_f\mathbf e_N
+ +\sum_{k,i}q_{g,i}P_{g,i}(k).
+\end{aligned}\label{eq:ivcost}
+\end{equation}
+Here $\mathbf e_k$ denotes tracking error and $\Delta\mathbf u_k$ successive command changes. This notation summarizes Eq.~(11) of \cite{muraleedharan2025racing}. The reference study considers combined force $F_i=\sqrt{F_{xi}^2+F_{yi}^2}$ relative to $\mu_iF_{zi}$ and uses the smooth penalty
+\begin{equation}
+P_{g,i}=\log\!\left[1+e^{A(F_i/F_{zi}-\mu_{\rm lim})}\right]
+-\log\!\left[1+e^{-A\mu_{\rm lim}}\right].
+\end{equation}
+It penalizes tire-force utilization near the chosen grip threshold. Actuator amplitude and rate bounds restrict sampled commands, whereas a finite grip penalty does not guarantee constraint satisfaction.
+
+The actual F1TENTH cost differs from Eq.~\ref{eq:ivcost}. Define the error penalty $E(z;q,c,l)=\min(qz^2,c)+l|z|$. With $w_k=(1-0.3k/(N-1))/N$, the implementation evaluates
+\begin{equation}
+\begin{aligned}
+J_{\rm F1}={}&\sum_{k=0}^{N-1}\left(w_kL_k+
+\frac{20000}{N}\mathbb I_{\rm occ}(\mathbf x_k)\right)\\
+&+\frac{E_{d,T}(d_{N-1})+E_{\psi,T}(e_{\psi,N-1})}{N},\\
+L_k={}&E_d(d_k)+E_\psi(e_{\psi,k})+0.05\delta_k^2-0.5s_k\\
+&+5(\delta_k-\delta_{k-1})^2
+ +P_{f,k}+P_{r,k}+P_{b,k}+P_{\alpha,k}.
+\end{aligned}\label{eq:f1cost}
+\end{equation}
+The command-change term is zero at $k=0$. The $(q,c,l)$ triples are $(400,600,50)$ for lateral error and $(3500,250,500)$ for heading error; terminal triples are $(200,400,20)$ and $(1500,200,100)$. The negative progress term rewards forward motion. The force penalties $P_f,P_r$ use lateral-force utilization $z_i=|F_{yi}|/(\mu F_{zi})$ and the barrier $2\{\log[1+\exp(20(z_i-1))]-\log[1+\exp(-20)]\}$. In particular, the configured pair \texttt{[20,2]} maps to sharpness 20 and multiplier 2 in the imported structure.
+
+For each track side, $P_b$ adds a linear penalty of gain 1500 for exceeding the boundary after subtracting half the car width and an extra 0.08~m margin, capped at 1000 per side. The slip penalty adds $\min(5000,1000\max(0,|\alpha_i|-0.15))$ per axle. These terms express preferences through finite costs.
+
+The occupancy indicator in Eq.~\ref{eq:f1cost} is obtained by projecting a predicted Frenet state into the local LiDAR grid, using curvature at the current vehicle position. A hit in an inflated occupied cell adds $20000/N=200$ per stage, independently of $w_k$. LiDAR returns are inflated by a square extending four cells in each direction. The lookup treats positions outside the local grid as unoccupied, so grid extent and the constant-curvature projection limit what this obstacle cost observes. The objective minimizes cost over the sampled candidates; it supplies neither a continuous-optimization optimum nor a formal collision-avoidance guarantee.
+
+\subsection{Receding-Horizon Execution on the GPU}
+The implementation follows the sampling, prediction, evaluation, and selection sequence of Algorithm~1 in \cite{muraleedharan2025racing}, specialized to steering:
+\begin{enumerate}
+\item Convert odometry to the five-state Frenet model and construct the reference horizon. Update the local grid from available LiDAR scans.
+\item Generate bounded IDCT steering sequences, including the hold and warm-start candidates.
+\item Propagate each candidate through Eqs.~\ref{eq:reducedmodel}--\ref{eq:tire} and accumulate Eq.~\ref{eq:f1cost}. CUDA executes candidate rollouts in parallel, with sequential state propagation within each candidate.
+\item Copy candidate costs to the host and select the smallest finite cost. Copy the winning trajectory and retain it for the next warm start.
+\item Publish the winning sequence's element at index 1, since index 0 is the current command. Compute the speed command separately and repeat at the next odometry callback.
+\end{enumerate}
+The node publishes zero speed and steering if the solver returns an error. The initial random seed is 70997 and is incremented by the solve-call index. Consequently, reproducing the sampled sequence also depends on the sequence of callbacks. Unlike a wholly GPU-resident minimum-cost reduction, this pinned solver selects the winner on the CPU after copying all candidate costs. This distinction matters when interpreting timing relative to the GPU-focused full-scale study.
+
+The separate speed command uses Eq.~\ref{eq:speed}, a forward-grid-distance heuristic, and clipping to the configured speed range. Its slew limiter advances by $a_{\max}\Delta t$ or $b_{\max}\Delta t$ per callback using the configured rollout step, rather than measured callback spacing. Therefore the tabulated acceleration settings are nominal increments in that implementation; their realized per-second effect depends on the callback rate. The speed floor is not a stopping policy near obstacles. These details should be included when reproducing or modifying the controller.

@@ -1,0 +1,11 @@
+reports/
+results/
+telemetry/
+experiments/
+paper/
+compose.local.yaml
+**/.git
+**/__pycache__
+**/build
+**/install
+**/log

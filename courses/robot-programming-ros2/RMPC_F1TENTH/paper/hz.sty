@@ -1,0 +1,232 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{hz}
+%\parfillskip=0.9\textwidth minus 0.9\textwidth%
+%\parfillskip=0pt plus 0.9\textwidth%
+\newcount\hours
+\newcount\minutes
+\hours=\time
+\divide\hours by 60
+\minutes=\time
+\multiply\hours by 60
+\advance\minutes by -\hours
+\divide\hours by 60
+\def\currenttime{\ifnum \hours < 10%
+		     0%
+		 \fi%
+		 \number\hours:%
+		 \ifnum\minutes < 10%
+		     0%
+		 \fi%
+		 \number\minutes}%
+
+\DeclareTextFontCommand{\textui}{\uishape}
+\let\ui\uishape
+\DeclareRobustCommand\sfit{%
+  \sffamily\slshape}
+\expandafter\ifx\csname pdfoutput\endcsname\relax
+   \else
+       \ifnum\pdfoutput > 0%
+	    \let\selectfont=\relax%
+	    \pdfadjustspacing=2%
+	    \pdfprotrudechars=2%
+	    \tolerance=500%
+	    \pretolerance=200%
+	    \hyphenpenalty=0%
+	    \emergencystretch=0.6em
+	    \DeclareRobustCommand\selectfont%
+		    {%
+		\ifx\f@linespread\baselinestretch \else%
+		  \set@fontsize\baselinestretch\f@size\f@baselineskip \fi%
+		\xdef\font@name{%
+		  \csname\curr@fontshape/\f@size\endcsname}%
+		\pickup@font%
+		\font@name%
+\expandafter\pdffontexpand\font@name 30 25 2 autoexpand%
+%
+\expandafter\efcode\font@name `0=0%
+\expandafter\efcode\font@name `1=0%
+\expandafter\efcode\font@name `2=0%
+\expandafter\efcode\font@name `3=0%
+\expandafter\efcode\font@name `4=0%
+\expandafter\efcode\font@name `5=0%
+\expandafter\efcode\font@name `6=0%
+\expandafter\efcode\font@name `7=0%
+\expandafter\efcode\font@name `8=0%
+\expandafter\efcode\font@name `9=0%
+%
+\expandafter\rpcode\font@name `.=20%
+\expandafter\rpcode\font@name `+=20%
+\expandafter\rpcode\font@name `-=20%
+\expandafter\rpcode\font@name `==20%
+\expandafter\rpcode\font@name `*=5%
+\expandafter\rpcode\font@name `,=20%
+\expandafter\rpcode\font@name `)=10%
+\expandafter\rpcode\font@name `\}=10%
+\expandafter\rpcode\font@name `A=10%
+\expandafter\rpcode\font@name `¥=10%
+\expandafter\rpcode\font@name `B=20%
+\expandafter\rpcode\font@name `C=10%
+\expandafter\rpcode\font@name `Æ=10%
+\expandafter\rpcode\font@name `D=20%
+\expandafter\rpcode\font@name `E=5%
+\expandafter\rpcode\font@name `Ê=5%
+\expandafter\rpcode\font@name `F=5%
+\expandafter\rpcode\font@name `G=5%
+\expandafter\rpcode\font@name `H=0%
+\expandafter\rpcode\font@name `I=0%
+\expandafter\rpcode\font@name `J=0%
+\expandafter\rpcode\font@name `K=10%
+\expandafter\rpcode\font@name `L=20%
+\expandafter\rpcode\font@name `£=20%
+\expandafter\rpcode\font@name `M=0%
+\expandafter\rpcode\font@name `N=0%
+\expandafter\rpcode\font@name `Ñ=0%
+\expandafter\rpcode\font@name `O=20%
+\expandafter\rpcode\font@name `Ó=20%
+\expandafter\rpcode\font@name `P=20%
+\expandafter\rpcode\font@name `Q=20%
+\expandafter\rpcode\font@name `R=10%
+\expandafter\rpcode\font@name `S=5%
+\expandafter\rpcode\font@name `=5%
+\expandafter\rpcode\font@name `T=20%
+\expandafter\rpcode\font@name `U=0%
+\expandafter\rpcode\font@name `V=20%
+\expandafter\rpcode\font@name `W=10%
+\expandafter\rpcode\font@name `X=10%
+\expandafter\rpcode\font@name `Y=20%
+\expandafter\rpcode\font@name `Z=5%
+\expandafter\rpcode\font@name `=5%
+\expandafter\rpcode\font@name `¯=5%
+%
+\expandafter\rpcode\font@name `0=20%
+\expandafter\rpcode\font@name `1=0%
+\expandafter\rpcode\font@name `2=5%
+\expandafter\rpcode\font@name `3=5%
+\expandafter\rpcode\font@name `5=5%
+\expandafter\rpcode\font@name `7=5%
+\expandafter\rpcode\font@name `7=10%
+\expandafter\rpcode\font@name `8=20%
+\expandafter\rpcode\font@name `9=20%
+%
+\expandafter\rpcode\font@name `a=20%
+\expandafter\rpcode\font@name `¹=20%
+\expandafter\rpcode\font@name `b=20%
+\expandafter\rpcode\font@name `c=20%
+\expandafter\rpcode\font@name `æ=20%
+\expandafter\rpcode\font@name `d=20%
+\expandafter\rpcode\font@name `e=20%
+\expandafter\rpcode\font@name `ê=20%
+\expandafter\rpcode\font@name `f=20%
+\expandafter\rpcode\font@name `g=5%
+\expandafter\rpcode\font@name `h=5%
+\expandafter\rpcode\font@name `i=0%
+\expandafter\rpcode\font@name `j=0%
+\expandafter\rpcode\font@name `k=20%
+\expandafter\rpcode\font@name `l=0%
+\expandafter\rpcode\font@name `³=0%
+\expandafter\rpcode\font@name `m=0%
+\expandafter\rpcode\font@name `n=0%
+\expandafter\rpcode\font@name `o=20%
+\expandafter\rpcode\font@name `ó=20%
+\expandafter\rpcode\font@name `p=20%
+\expandafter\rpcode\font@name `q=20%
+\expandafter\rpcode\font@name `r=20%
+\expandafter\rpcode\font@name `s=20%
+\expandafter\rpcode\font@name `=20%
+\expandafter\rpcode\font@name `t=20%
+\expandafter\rpcode\font@name `u=20%
+\expandafter\rpcode\font@name `v=20%
+\expandafter\rpcode\font@name `w=20%
+\expandafter\rpcode\font@name `x=20%
+\expandafter\rpcode\font@name `y=0%
+\expandafter\rpcode\font@name `z=5%
+\expandafter\rpcode\font@name `=5%
+\expandafter\rpcode\font@name `¯=5%
+%
+%
+\expandafter\lpcode\font@name `0=20%
+\expandafter\lpcode\font@name `1=20%
+\expandafter\lpcode\font@name `3=20%
+\expandafter\lpcode\font@name `6=20%
+\expandafter\lpcode\font@name `8=20%
+\expandafter\lpcode\font@name `9=20%
+%
+\expandafter\lpcode\font@name `+=20%
+\expandafter\lpcode\font@name `-=20%
+\expandafter\lpcode\font@name `==20%
+\expandafter\lpcode\font@name `(=20%
+\expandafter\lpcode\font@name `\{=20%
+\expandafter\lpcode\font@name `A=5%
+\expandafter\lpcode\font@name `¥=5%
+\expandafter\lpcode\font@name `B=0%
+\expandafter\lpcode\font@name `C=20%
+\expandafter\lpcode\font@name `Æ=20%
+\expandafter\lpcode\font@name `D=0%
+\expandafter\lpcode\font@name `E=0%
+\expandafter\lpcode\font@name `F=0%
+\expandafter\lpcode\font@name `G=20%
+\expandafter\lpcode\font@name `H=0%
+\expandafter\lpcode\font@name `I=0%
+\expandafter\lpcode\font@name `J=5%
+\expandafter\lpcode\font@name `K=0%
+\expandafter\lpcode\font@name `L=0%
+\expandafter\lpcode\font@name `£=2%
+\expandafter\lpcode\font@name `M=0%
+\expandafter\lpcode\font@name `N=0%
+\expandafter\lpcode\font@name `O=20%
+\expandafter\lpcode\font@name `Ó=20%
+\expandafter\lpcode\font@name `P=0%
+\expandafter\lpcode\font@name `Q=20%
+\expandafter\lpcode\font@name `R=0%
+\expandafter\lpcode\font@name `S=5%
+\expandafter\lpcode\font@name `=5%
+\expandafter\lpcode\font@name `T=20%
+\expandafter\lpcode\font@name `U=0%
+\expandafter\lpcode\font@name `V=20%
+\expandafter\lpcode\font@name `W=5%
+\expandafter\lpcode\font@name `X=5%
+\expandafter\lpcode\font@name `Y=5%
+\expandafter\lpcode\font@name `Z=5%
+\expandafter\lpcode\font@name `=5%
+\expandafter\lpcode\font@name `¯=5%
+%
+\expandafter\lpcode\font@name `a=10%
+\expandafter\lpcode\font@name `¹=10%
+\expandafter\lpcode\font@name `b=0%
+\expandafter\lpcode\font@name `c=20%
+\expandafter\lpcode\font@name `æ=20%
+\expandafter\lpcode\font@name `d=20%
+\expandafter\lpcode\font@name `e=20%
+\expandafter\lpcode\font@name `ê=20%
+\expandafter\lpcode\font@name `f=2%
+\expandafter\lpcode\font@name `g=5%
+\expandafter\lpcode\font@name `h=0%
+\expandafter\lpcode\font@name `i=0%
+\expandafter\lpcode\font@name `j=2%
+\expandafter\lpcode\font@name `k=0%
+\expandafter\lpcode\font@name `l=0%
+\expandafter\lpcode\font@name `³=5%
+\expandafter\lpcode\font@name `m=0%
+\expandafter\lpcode\font@name `n=0%
+\expandafter\lpcode\font@name `ñ=0%
+\expandafter\lpcode\font@name `o=20%
+\expandafter\lpcode\font@name `ó=20%
+\expandafter\lpcode\font@name `p=0%
+\expandafter\lpcode\font@name `q=20%
+\expandafter\lpcode\font@name `r=0%
+\expandafter\lpcode\font@name `s=20%
+\expandafter\lpcode\font@name `=20%
+\expandafter\lpcode\font@name `t=0%
+\expandafter\lpcode\font@name `u=0%
+\expandafter\lpcode\font@name `v=20%
+\expandafter\lpcode\font@name `w=20%
+\expandafter\lpcode\font@name `x=20%
+\expandafter\lpcode\font@name `z=20%
+\expandafter\lpcode\font@name `=20%
+\expandafter\lpcode\font@name `¿=20%
+		\size@update%
+		\enc@update%
+		}%
+	\fi%
+\fi%
+\endinput

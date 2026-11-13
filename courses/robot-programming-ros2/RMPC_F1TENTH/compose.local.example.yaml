@@ -1,0 +1,7 @@
+# Optional host-specific graphics devices for RViz on hybrid-GPU laptops.
+# Copy to compose.local.yaml only if needed. run.sh detects that file.
+services:
+  stack:
+    devices:
+      - /dev/dri/card1:/dev/dri/card1
+      - /dev/dri/renderD128:/dev/dri/renderD128
