@@ -19,6 +19,7 @@ Read the course materials in the following order:
 | 1 | Ubuntu Terminal Basics | Ubuntu command-line essentials for the practical sessions. | [PDF](/courses/robot-programming-ros2/materials/ubuntu_linux_terminal_basics.pdf) |
 | 2 | Getting Started with ROS 2 Jazzy | Installation on Ubuntu 24.04, development tools, and first examples. | [PDF](/courses/robot-programming-ros2/materials/ros2_installation.pdf) |
 | 3 | ROS 2 Introduction: Andino Lab | Docker setup, Gazebo simulation, topics, camera visualization in RViz, and TF coordinate frames. | [PDF](/courses/robot-programming-ros2/materials/ros2_introduction.pdf) |
+| 4 | Python Basics for ROS 2 | Sensor readings, Python functions and classes, and a ROS 2 subscriber node. | [PDF](/courses/robot-programming-ros2/materials/python_basics.pdf) |
 
 ## Course information
 
